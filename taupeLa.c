@@ -5,11 +5,8 @@
 #include <string.h>
 #include <time.h>
 
-
 #define SCREEN_W 1500 //largeur de la fenêtre allegro
 #define SCREEN_H 1000  //hauteur de la fenêtre allegro
-
-
 
 typedef struct banqueImage //  Structure utilisée pour stocker les images utilisées pour le projet
 {
@@ -18,7 +15,6 @@ typedef struct banqueImage //  Structure utilisée pour stocker les images utili
     BITMAP * batMinigame[3]; //batiments représentant les mini jeux
     BITMAP * finishLine; // lgne d'arrivée de la course hippique
     BITMAP * taupe; //taupe
-
 
 }t_banqueImage;
 
@@ -35,32 +31,22 @@ typedef struct banquePolice //  Structure utilisée pour stocker les polices uti
 
 typedef struct joueur //structure chargée de stocker les informations d'un joueur
 {
-    //nom
     char* name; //nom du joueur
-    //taille du nom
-    int taillenom;
-    //nombre de tickets
-    int tickets;
-    //score
-    int score;
-    //couleur
-    int color;
+    int taillenom; //taille du nom  
+    int tickets;  //nombre de tickets  
+    int score;  //score
+    int color;  //couleur
 
 } t_joueur;
 
 
 typedef struct minigame //structure chargée de stocker les informations d'une attraction
-{
-    //nom
-    char titre[20];
-    //difficulées
-    int difficulty;
+{   
+    char titre[20]; //nom   
+    int difficulty; //difficulées
     //specs
-
-    //tab de cases prises par le bat
-    int coordBat[2][2];
-    //coord de la case permettant de lancer le minijeu
-    int coordPlay[2];
+    int coordBat[2][2]; //tab de cases prises par le bat   
+    int coordPlay[2]; //coord de la case permettant de lancer le minijeu
 
 } t_minigame;
 
@@ -76,12 +62,9 @@ typedef struct terrain //structure permettant de stocker les informations de la 
 
 typedef struct partie //structure principale chargée de stocker toutes les infos de la partie
 {
-    //tab de 2 joueurs
-    t_joueur playerBase[2];
-    //tab de 4 minigame
-    t_minigame jeux[4];
-    //carte du jeu
-    t_terrain plateau[15][15];
+    t_joueur playerBase[2];   //tab de 2 joueurs   
+    t_minigame jeux[4]; //tab de 4 minigame   
+    t_terrain plateau[15][15]; //carte du jeu
 } t_partie;
 
 void initAllegro(); //SSPG chargé d'initialiser les fonctions d'allegro
@@ -312,14 +295,12 @@ t_partie taupeLa(t_partie partie, t_banqueImage image, t_banquePolice police)
     return partie;
 }
 
-
 void barreChargement()
 {
     BITMAP * buffer2x;
     buffer2x=create_bitmap(SCREEN_W,SCREEN_H);//creation du bitmap buffer double
 
     //Kabel_28= load_font("polices/kabelMono_28.pcx", NULL, NULL);//on load la police Kabel en 28
-
    // BITMAP *MenuDecor;//création du fond d'écran
    // MenuDecor=load_bitmap("images/FondMono.bmp",NULL); //chargement de l'image de fond
     //blit(MenuDecor,buffer2x,0,0,0,0,SCREEN_W,SCREEN_H);//affichage du decor du menu sur le buffer
@@ -377,14 +358,14 @@ void initAllegro()
     allegro_init();    //initialisation allegro
     install_keyboard(); //on permet l'utilisation du clavier
     install_mouse();  //on permet l'utilisation de la souris
-    set_color_depth(desktop_color_depth());    //initialisation de la palette de couleur
+    set_color_depth(desktop_color_depth());  //initialisation de la palette de couleur
 
-    if((set_gfx_mode(GFX_AUTODETECT_WINDOWED,SCREEN_W,SCREEN_H,0,0))!=0)      //paramètres fenêtre
+    if((set_gfx_mode(GFX_AUTODETECT_WINDOWED,SCREEN_W,SCREEN_H,0,0))!=0) //paramètres fenêtre
     {
         //problème avec fenêtre allegro
         allegro_message("Pb de mode graphique");
-        allegro_exit();                                             //fermeture allegro
-        exit(EXIT_FAILURE);                                         //sortie forcée du programme
+        allegro_exit();    //fermeture allegro
+        exit(EXIT_FAILURE);  //sortie forcée du programme
     }
     show_mouse(screen); //on affiche la souris à l'écran
 }
