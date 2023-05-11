@@ -74,13 +74,10 @@ typedef struct terrain //structure permettant de stocker les informations de la 
 
 
 typedef struct partie //structure principale chargée de stocker toutes les infos de la partie
-{
-    //tab de 2 joueurs
-    t_joueur playerBase[2];
-    //tab de 4 minigame
-    t_minigame jeux[4];
-    //carte du jeu
-    t_terrain plateau[15][15];
+{                              
+    t_joueur playerBase[2]; //tab de 2 joueurs
+    t_minigame jeux[4]; //tab de 4 minigames
+    t_terrain plateau[15][15]; //carte du jeu
 
 
 
