@@ -1,9 +1,9 @@
 # Projet
 ### **Parc d'attraction virtuel :** 
 ### Attractions disponibles :     
--jeu1 : Taupe La      
--jeu2 : Tir sur Ballon   
--jeu3 : Paris Hippiques    
+  -Premier jeu : Taupe La      
+  -Deuxième jeu : Tir sur Ballon   
+  -Troisième jeu : Paris Hippiques    
 
 Thème : Rollercoaster Tycoon
 
