@@ -6,11 +6,11 @@
 #include <time.h>
 
 
-#define SCREEN_W 1500 //largeur de la fenêtre allegro
-#define SCREEN_H 1000  //hauteur de la fenêtre allegro
+#define SCREEN_W 1500 //largeur fenêtre allegro
+#define SCREEN_H 1000  //hauteur fenêtre allegro
 
 
-typedef struct banqueImage //  Structure utilisée pour stocker les images utilisées pour le projet
+typedef struct banqueImage //  Structure utilisée pour stocker les images utilisées 
 {
     BITMAP * fondMenu; //fond du menu principal
     BITMAP * joueur; // sprite du joueur
@@ -22,7 +22,7 @@ typedef struct banqueImage //  Structure utilisée pour stocker les images utili
 }t_banqueImage;
 
 
-typedef struct banquePolice //  Structure utilisée pour stocker les polices utilisées pour le projet
+typedef struct banquePolice //Structure utilisée pour stocker les polices utilisées
 {
     FONT * Roller_72;
     FONT * Roller_it_24;
@@ -34,58 +34,44 @@ typedef struct banquePolice //  Structure utilisée pour stocker les polices uti
 
 typedef struct joueur //structure chargée de stocker les informations d'un joueur
 {
-    //nom
     char* name; //nom du joueur
-    //taille du nom
-    int taillenom;
-    //nombre de tickets
-    int tickets;
-    //score
-    int score;
-    //couleur
-    int color;
+    int taillenom; //taille du nom
+    int tickets;  //nombre de tickets
+    int score; //score
+    int color;  //couleur
 
 } t_joueur;
 
 
 typedef struct minigame //structure chargée de stocker les informations d'une attraction
 {
-    //nom
-    char titre[20];
-    //difficulées
-    int difficulty;
+    char titre[20]; //nom
+    int difficulty; //difficulées
     //specs
-
-    //tab de cases prises par le bat
-    int coordBat[2][2];
-    //coord de la case permettant de lancer le minijeu
-    int coordPlay[2];
+    int coordBat[2][2];  //tab de cases prises par le bat
+    int coordPlay[2];  //coord de la case permettant de lancer le minijeu
 
 } t_minigame;
 
 
 typedef struct terrain //structure permettant de stocker les informations de la carte où l'on se déplace pour atteindre les différentes attractions
 {
-    int occupied; //0=non (traversable) 1=oui (pas traversable)
-    int isStartAttraction; //savoir si la case est un emplacement pour démarrer une attraction
-    int isPlayerPos; //savoir si le joueur se trouve sur cette case
+    int occupied;  //0=non (traversable) 1=oui (pas traversable)
+    int isStartAttraction;  //savoir si la case est un emplacement pour démarrer une attraction
+    int isPlayerPos;  //savoir si le joueur se trouve sur cette case
 } t_terrain;
 
 
 
 typedef struct partie //structure principale chargée de stocker toutes les infos de la partie
 {
-    //tab de 2 joueurs
-    t_joueur playerBase[2];
-    //tab de 4 minigame
-    t_minigame jeux[4];
-    //carte du jeu
-    t_terrain plateau[15][15];
-
-
-
+    t_joueur playerBase[2]; //tab de 2 joueurs
+    t_minigame jeux[4]; //tab de 4 minigame
+    t_terrain plateau[15][15];  //carte du jeu
 
 } t_partie;
+
+
 
 void initAllegro(); //SSPG chargé d'initialiser les fonctions d'allegro
 int isClickInCoord(int x1, int x2, int y1, int y2);
