@@ -363,8 +363,8 @@ void initAllegro()
     {
         //problème avec fenêtre allegro
         allegro_message("Pb de mode graphique");
-        allegro_exit();                                             //fermeture allegro
-        exit(EXIT_FAILURE);                                         //sortie forcée du programme
+        allegro_exit();                         //fermeture allegro
+        exit(EXIT_FAILURE);                    //sortie forcée du programme
     }
 
     show_mouse(screen); //on affiche la souris à l'écran
