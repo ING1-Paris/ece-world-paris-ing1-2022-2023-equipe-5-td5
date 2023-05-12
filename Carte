@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <allegro.h>
+
+
+#define SCREEN_W 1500 
+#define SCREEN_H 1000  
+
+
+typedef struct banqueImage 
+{
+    BITMAP * fondMenu; 
+    BITMAP * joueur; 
+    BITMAP * batMinigame[3]; 
+    BITMAP * finishLine; 
+    BITMAP * taupe; //taupe
+
+
+} t_banqueImage;
+
+
+typedef struct banquePolice //  Structure utilisée pour stocker les polices utilisées pour le projet
+{
+    FONT * Roller_72;
+    FONT * Roller_it_24;
+    FONT * Pixel_11;
+    FONT * System_14;
+    FONT * Hudson_26;
+
+} t_banquePolice;
+
+typedef struct joueur //structure chargée de stocker les informations d'un joueur
+{
+    char* name; 
+    int taillenom;
+    int tickets;
+    int score;
+    int color;
+
+} t_joueur;
