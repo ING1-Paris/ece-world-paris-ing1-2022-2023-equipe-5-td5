@@ -3,23 +3,23 @@
 #include <allegro.h>
 
 
-#define SCREEN_W 1500 
-#define SCREEN_H 1000  
+#define SCREEN_W 1500  //largeur de la fenêtre allegro
+#define SCREEN_H 1000  //hauteur de la fenêtre allegro
 
 
-typedef struct banqueImage 
+typedef struct banqueImage   //Structure pour stocker les images 
 {
-    BITMAP * fondMenu; 
-    BITMAP * joueur; 
-    BITMAP * batMinigame[3]; 
-    BITMAP * finishLine; 
+    BITMAP * fondMenu; //fond du menu principal
+    BITMAP * joueur;  // sprite du joueur
+    BITMAP * batMinigame[3]; //batiments représentant les mini jeux
+    BITMAP * finishLine; // ligne d'arrivée de la course hippique
     BITMAP * taupe; //taupe
 
 
 } t_banqueImage;
 
 
-typedef struct banquePolice //  Structure utilisée pour stocker les polices utilisées pour le projet
+typedef struct banquePolice //  Structure pour stocker les polices
 {
     FONT * Roller_72;
     FONT * Roller_it_24;
