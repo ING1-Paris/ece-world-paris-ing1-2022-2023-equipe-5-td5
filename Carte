@@ -21,7 +21,7 @@ typedef struct banqueImage   //Structure pour stocker les images
 
 typedef struct banquePolice //  Structure pour stocker les polices
 {
-    FONT * Roller_72;
+    FONT * Roller_72;  
     FONT * Roller_it_24;
     FONT * Pixel_11;
     FONT * System_14;
@@ -33,11 +33,11 @@ typedef struct banquePolice //  Structure pour stocker les polices
 
 typedef struct joueur //structure chargée de stocker les informations d'un joueur
 {
-    char* name; 
-    int taillenom;
-    int tickets;
-    int score;
-    int color;
+    char* name; //nom joueur 
+    int taillenom; //taille du nom
+    int tickets;  //nombre de tickets 
+    int score; //score
+    int color; //couleur
 
 } t_joueur;
 
