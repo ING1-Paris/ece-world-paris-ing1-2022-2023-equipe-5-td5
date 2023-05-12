@@ -15,8 +15,8 @@ typedef struct banqueImage   //Structure pour stocker les images
     BITMAP * finishLine; // ligne d'arrivée de la course hippique
     BITMAP * taupe; //taupe
 
-
 } t_banqueImage;
+
 
 
 typedef struct banquePolice //  Structure pour stocker les polices
@@ -29,6 +29,8 @@ typedef struct banquePolice //  Structure pour stocker les polices
 
 } t_banquePolice;
 
+
+
 typedef struct joueur //structure chargée de stocker les informations d'un joueur
 {
     char* name; 
@@ -38,3 +40,29 @@ typedef struct joueur //structure chargée de stocker les informations d'un joue
     int color;
 
 } t_joueur;
+
+
+
+typedef struct terrain //structure qui stock les informations de la carte où l'on se déplace pour atteindre les différentes attractions
+{
+    int occupied; //0=non (traversable) 1=oui (pas traversable)
+    int isStartAttraction; //savoir si la case est un emplacement pour démarrer une attraction
+    int isPlayerPos; //savoir si le joueur est sur cette case
+    
+} t_terrain;
+
+
+
+
+typedef struct minigame //structure chargée de stocker les informations d'une attraction
+{
+    char titre[20];   //nom
+    int difficulty;   //difficulées
+    
+    //specs
+    
+    int coordBat[2][2]; //tab de cases prises par le bat
+    int coordPlay[2];   //coord de la case permettant de lancer le minijeu
+
+} t_minigame;
+
