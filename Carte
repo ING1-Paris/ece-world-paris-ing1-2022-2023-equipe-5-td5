@@ -52,19 +52,19 @@ typedef struct terrain         //structure qui stock les informations de la cart
 } t_terrain;
 
 
-typedef struct minigame  
+typedef struct minigame  //structure chargée de stocker les informations d'une attraction
 {
-    char titre[20];    
-    int difficulty;   
-    int coordBat[2][2];   
-    int coordPlay[2];     
+    char titre[20];    //nom
+    int difficulty;   //difficulté
+    int coordBat[2][2];   //tableau de cases prise par le bat
+    int coordPlay[2];   //coord de la case qui lance le mini-jeu  
 
 } t_minigame;
 typedef struct partie //structure principale chargée de stocker toutes les infos de la partie
 {
-    t_joueur playerBase[2];//tab de 2 joueurs  
-    t_minigame jeux[4];//tab de 4 minigame  
-    t_terrain plateau[15][15];//carte du jeu
+    t_joueur playerBase[2]; //tab de 2 joueurs  
+    t_minigame jeux[4]; //tab de 4 minigame  
+    t_terrain plateau[15][15]; //carte du jeu
 } t_partie;
 
 t_banquePolice loadBanquePolices();
