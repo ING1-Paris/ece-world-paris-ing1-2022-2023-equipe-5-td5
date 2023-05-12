@@ -6,23 +6,23 @@
 #include <time.h>
 
 
-#define SCREEN_W 1500 //largeur de la fenêtre allegro
-#define SCREEN_H 1000  //hauteur de la fenêtre allegro
+#define SCREEN_W 1500 //largeur fenêtre allegro
+#define SCREEN_H 1000  //hauteur fenêtre allegro
 
 
 
-typedef struct banqueImage //  Structure utilisée pour stocker les images utilisées pour le projet
+typedef struct banqueImage  //Structure pour stocker les images 
 {
-    BITMAP * fondMenu; //fond du menu principal
-    BITMAP * joueur; // sprite du joueur
+    BITMAP * fondMenu;       //fond du menu principal
+    BITMAP * joueur;         // sprite du joueur
     BITMAP * batMinigame[3]; //batiments représentant les mini jeux
-    BITMAP * finishLine; // lgne d'arrivée de la course hippique
-    BITMAP * taupe; //taupe
+    BITMAP * finishLine;     // lgne d'arrivée de la course hippique
+    BITMAP * taupe;          //taupe
 
 
 }t_banqueImage;
 
-typedef struct banquePolice //  Structure utilisée pour stocker les polices utilisées pour le projet
+typedef struct banquePolice   //Structure pour stocker les polices
 {
     FONT * Roller_72;
     FONT * Roller_it_24;
@@ -34,10 +34,8 @@ typedef struct banquePolice //  Structure utilisée pour stocker les polices uti
 
 typedef struct joueur //structure chargée de stocker les informations d'un joueur
 {
-    //nom
     char* name; //nom du joueur
-    //taille du nom
-    int taillenom;
+    int taillenom; //taille du nom
     //nombre de tickets
     int tickets;
     //score
