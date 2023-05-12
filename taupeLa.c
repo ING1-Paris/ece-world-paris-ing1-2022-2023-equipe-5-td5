@@ -39,7 +39,6 @@ typedef struct joueur //structure chargée de stocker les informations d'un joue
 
 } t_joueur;
 
-
 typedef struct minigame //structure chargée de stocker les informations d'une attraction
 {   
     char titre[20]; //nom   
@@ -50,15 +49,12 @@ typedef struct minigame //structure chargée de stocker les informations d'une a
 
 } t_minigame;
 
-
 typedef struct terrain //structure permettant de stocker les informations de la carte où l'on se déplace pour atteindre les différentes attractions
 {
     int occupied; //0=non (traversable) 1=oui (pas traversable)
     int isStartAttraction; //savoir si la case est un emplacement pour démarrer une attraction
     int isPlayerPos; //savoir si le joueur se trouve sur cette case
 } t_terrain;
-
-
 
 typedef struct partie //structure principale chargée de stocker toutes les infos de la partie
 {
@@ -75,13 +71,11 @@ t_banqueImage loadBanqueImage();
 t_partie taupeLa(t_partie partie, t_banqueImage image, t_banquePolice police);
 int isClickInRadius(int x, int y, int rad);
 
-
 int main()
 {
     //les taupes apparaissent par vagues toutes les 2 à 3 sec
     //elles restent entre 1 et 2 sec
     //20 sec par round
-    //chacun son tour
 
     t_partie partie;
     t_banqueImage image;
@@ -92,7 +86,6 @@ int main()
 
     partie.playerBase[1].name = malloc(sizeof(strlen("Valjean")));
     strcpy(partie.playerBase[1].name, "Valjean");
-
 
     initAllegro(); //on initialise tout le nécessaire en rapport avec allegro
 
@@ -278,7 +271,6 @@ t_partie taupeLa(t_partie partie, t_banqueImage image, t_banquePolice police)
             }
         }
 
-
         ///DETECT CLICK TAUPE
         //on boucle pour chaque emplacement de taupe possible
         for(int i=0; i<13; i++)
@@ -302,7 +294,7 @@ void barreChargement()
 
     //Kabel_28= load_font("polices/kabelMono_28.pcx", NULL, NULL);//on load la police Kabel en 28
    // BITMAP *MenuDecor;//création du fond d'écran
-   // MenuDecor=load_bitmap("images/FondMono.bmp",NULL); //chargement de l'image de fond
+    // MenuDecor=load_bitmap("images/FondMono.bmp",NULL); //chargement de l'image de fond
     //blit(MenuDecor,buffer2x,0,0,0,0,SCREEN_W,SCREEN_H);//affichage du decor du menu sur le buffer
 
     rectfill(buffer2x,0,0,SCREEN_W, SCREEN_H, makecol(255,255,255));
