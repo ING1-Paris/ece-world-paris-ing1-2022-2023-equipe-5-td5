@@ -18,8 +18,8 @@ typedef struct banqueImage //  Structure utilisée pour stocker les images utili
     BITMAP * finishLine; // lgne d'arrivée de la course hippique
     BITMAP * taupe; //taupe
 
-
 }t_banqueImage;
+
 
 
 typedef struct banquePolice //Structure utilisée pour stocker les polices utilisées
@@ -32,6 +32,8 @@ typedef struct banquePolice //Structure utilisée pour stocker les polices utili
 
 }t_banquePolice;
 
+
+
 typedef struct joueur //structure chargée de stocker les informations d'un joueur
 {
     char* name; //nom du joueur
@@ -43,30 +45,33 @@ typedef struct joueur //structure chargée de stocker les informations d'un joue
 } t_joueur;
 
 
+
 typedef struct minigame //structure chargée de stocker les informations d'une attraction
 {
     char titre[20]; //nom
     int difficulty; //difficulées
     //specs
     int coordBat[2][2];  //tab de cases prises par le bat
-    int coordPlay[2];  //coord de la case permettant de lancer le minijeu
+    int coordPlay[2];    //coord de la case permettant de lancer le minijeu
 
 } t_minigame;
 
 
+
 typedef struct terrain //structure permettant de stocker les informations de la carte où l'on se déplace pour atteindre les différentes attractions
 {
-    int occupied;  //0=non (traversable) 1=oui (pas traversable)
-    int isStartAttraction;  //savoir si la case est un emplacement pour démarrer une attraction
-    int isPlayerPos;  //savoir si le joueur se trouve sur cette case
+    int occupied;            //0=non (traversable) 1=oui (pas traversable)
+    int isStartAttraction;   //savoir si la case est un emplacement pour démarrer une attraction
+    int isPlayerPos;         //savoir si le joueur se trouve sur cette case
+    
 } t_terrain;
 
 
 
 typedef struct partie //structure principale chargée de stocker toutes les infos de la partie
 {
-    t_joueur playerBase[2]; //tab de 2 joueurs
-    t_minigame jeux[4]; //tab de 4 minigame
+    t_joueur playerBase[2];     //tab de 2 joueurs
+    t_minigame jeux[4];         //tab de 4 minigame
     t_terrain plateau[15][15];  //carte du jeu
 
 } t_partie;
@@ -84,7 +89,6 @@ t_banqueImage loadBanqueImage();
 
 int main()
 {
-
 
     //4 options pour miser sur un cheval (Rouge, Vert, Bleu, Jaune)
     //chaque joueur paris sur un cheval (possible que ce soit le même pour les 2 joueurs
