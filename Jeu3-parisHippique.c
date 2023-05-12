@@ -10,13 +10,13 @@
 #define SCREEN_H 1000  //hauteur fenêtre allegro
 
 
-typedef struct banqueImage //  Structure utilisée pour stocker les images utilisées 
+typedef struct banqueImage   //Structure utilisée pour stocker les images utilisées 
 {
-    BITMAP * fondMenu; //fond du menu principal
-    BITMAP * joueur; // sprite du joueur
-    BITMAP * batMinigame[3]; //batiments représentant les mini jeux
-    BITMAP * finishLine; // lgne d'arrivée de la course hippique
-    BITMAP * taupe; //taupe
+    BITMAP * fondMenu;          //fond du menu principal
+    BITMAP * joueur;            // sprite du joueur
+    BITMAP * batMinigame[3];    //batiments représentant les mini jeux
+    BITMAP * finishLine;        // lgne d'arrivée de la course hippique
+    BITMAP * taupe;             //taupe
 
 }t_banqueImage;
 
@@ -36,20 +36,20 @@ typedef struct banquePolice //Structure utilisée pour stocker les polices utili
 
 typedef struct joueur //structure chargée de stocker les informations d'un joueur
 {
-    char* name; //nom du joueur
-    int taillenom; //taille du nom
-    int tickets;  //nombre de tickets
-    int score; //score
-    int color;  //couleur
+    char* name;     //nom du joueur
+    int taillenom;  //taille du nom
+    int tickets;    //nombre de tickets
+    int score;      //score
+    int color;      //couleur
 
 } t_joueur;
 
 
 
-typedef struct minigame //structure chargée de stocker les informations d'une attraction
+typedef struct minigame  //structure chargée de stocker les informations d'une attraction
 {
-    char titre[20]; //nom
-    int difficulty; //difficulées
+    char titre[20];      //nom
+    int difficulty;      //difficulées
     //specs
     int coordBat[2][2];  //tab de cases prises par le bat
     int coordPlay[2];    //coord de la case permettant de lancer le minijeu
@@ -58,7 +58,7 @@ typedef struct minigame //structure chargée de stocker les informations d'une a
 
 
 
-typedef struct terrain //structure permettant de stocker les informations de la carte où l'on se déplace pour atteindre les différentes attractions
+typedef struct terrain    //structure permettant de stocker les informations de la carte où l'on se déplace pour atteindre les différentes attractions
 {
     int occupied;            //0=non (traversable) 1=oui (pas traversable)
     int isStartAttraction;   //savoir si la case est un emplacement pour démarrer une attraction
@@ -78,7 +78,7 @@ typedef struct partie //structure principale chargée de stocker toutes les info
 
 
 
-void initAllegro(); //SSPG chargé d'initialiser les fonctions d'allegro
+void initAllegro();      //SSPG chargé d'initialiser les fonctions d'allegro
 int isClickInCoord(int x1, int x2, int y1, int y2);
 void barreChargement();
 t_banquePolice loadBanquePolices();
