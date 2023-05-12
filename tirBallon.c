@@ -32,7 +32,7 @@ typedef struct banquePolice   //Structure pour stocker les polices
 
 }t_banquePolice;
 
-typedef struct joueur //structure chargée de stocker les informations d'un joueur
+typedef struct joueur  //structure chargée de stocker les informations d'un joueur
 {
     char* name; //nom du joueur
     int taillenom; //taille du nom
@@ -62,11 +62,11 @@ typedef struct minigame //structure chargée de stocker les informations d'une a
 } t_minigame;
 
 
-typedef struct terrain //structure permettant de stocker les informations de la carte où l'on se déplace pour atteindre les différentes attractions
+typedef struct terrain  //structure pour stocker les informations de la carte où l'on se déplace pour atteindre les différentes attractions
 {
-    int occupied; //0=non (traversable) 1=oui (pas traversable)
+    int occupied;          //0=non (traversable) 1=oui (pas traversable)
     int isStartAttraction; //savoir si la case est un emplacement pour démarrer une attraction
-    int isPlayerPos; //savoir si le joueur se trouve sur cette case
+    int isPlayerPos;       //savoir si le joueur se trouve sur cette case
 } t_terrain;
 
 
@@ -76,11 +76,10 @@ typedef struct partie //structure principale chargée de stocker toutes les info
     t_joueur playerBase[2]; //tab de 2 joueurs
     t_minigame jeux[4]; //tab de 4 minigames
     t_terrain plateau[15][15]; //carte du jeu
-
-
-
-
+    
 } t_partie;
+
+
 
 void initAllegro(); //SSPG chargé d'initialiser les fonctions d'allegro
 int isClickInCoord(int x1, int x2, int y1, int y2);
@@ -88,6 +87,8 @@ void barreChargement();
 t_banquePolice loadBanquePolices();
 t_banqueImage loadBanqueImage();
 t_partie tirAuBallon(t_partie partie, t_banqueImage image, t_banquePolice police );
+
+
 
 int main()
 {
@@ -255,14 +256,9 @@ t_partie tirAuBallon(t_partie partie, t_banqueImage image, t_banquePolice police
     //toute les 10 secondes, le ballon change de direction
     //xdir et ydir rand (-3,3) pour la frame d'affichage
 
-
-
-
-
-
-
     return partie;
 }
+
 
 void loadStartGame(t_banquePolice police, t_partie partie)
 {
