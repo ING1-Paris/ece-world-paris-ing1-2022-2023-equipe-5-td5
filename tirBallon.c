@@ -14,9 +14,9 @@
 typedef struct banqueImage  //Structure pour stocker les images 
 {
     BITMAP * fondMenu;       //fond du menu principal
-    BITMAP * joueur;         // sprite du joueur
+    BITMAP * joueur;         //sprite du joueur
     BITMAP * batMinigame[3]; //batiments représentant les mini jeux
-    BITMAP * finishLine;     // lgne d'arrivée de la course hippique
+    BITMAP * finishLine;     //ligne d'arrivée de la course hippique
     BITMAP * taupe;          //taupe
 
 
