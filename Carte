@@ -3,23 +3,23 @@
 #include <allegro.h>
 
 
-#define SCREEN_W 1500  //largeur de la fenêtre allegro
-#define SCREEN_H 1000  //hauteur de la fenêtre allegro
+#define SCREEN_W 1500  //largeur fenêtre allegro
+#define SCREEN_H 1000  //hauteur fenêtre allegro
 
 
-typedef struct banqueImage   //Structure pour stocker les images 
+typedef struct banqueImage      //Structure pour stocker les images 
 {
-    BITMAP * fondMenu; //fond du menu principal
-    BITMAP * joueur;  // sprite du joueur
-    BITMAP * batMinigame[3]; //batiments représentant les mini jeux
-    BITMAP * finishLine; // ligne d'arrivée de la course hippique
-    BITMAP * taupe; //taupe
+    BITMAP * fondMenu;          //fond du menu principal
+    BITMAP * joueur;            // sprite du joueur
+    BITMAP * batMinigame[3];    //batiments représentant les mini jeux
+    BITMAP * finishLine;        // ligne d'arrivée de la course hippique
+    BITMAP * taupe;             //taupe
 
 } t_banqueImage;
 
 
 
-typedef struct banquePolice //  Structure pour stocker les polices
+typedef struct banquePolice    //Structure pour stocker les polices
 {
     FONT * Roller_72;  
     FONT * Roller_it_24;
@@ -31,38 +31,38 @@ typedef struct banquePolice //  Structure pour stocker les polices
 
 
 
-typedef struct joueur //structure chargée de stocker les informations d'un joueur
+typedef struct joueur   //structure chargée de stocker les informations d'un joueur
 {
-    char* name; //nom joueur 
-    int taillenom; //taille du nom
-    int tickets;  //nombre de tickets 
-    int score; //score
-    int color; //couleur
+    char* name;      //nom joueur 
+    int taillenom;   //taille du nom
+    int tickets;     //nombre de tickets 
+    int score;       //score
+    int color;       //couleur
 
 } t_joueur;
 
 
 
-typedef struct terrain //structure qui stock les informations de la carte où l'on se déplace pour atteindre les différentes attractions
+typedef struct terrain         //structure qui stock les informations de la carte où l'on se déplace pour atteindre les différentes attractions
 {
-    int occupied; //0=non (traversable) 1=oui (pas traversable)
-    int isStartAttraction; //savoir si la case est un emplacement pour démarrer une attraction
-    int isPlayerPos; //savoir si le joueur est sur cette case
+    int occupied;              //0=non (traversable) 1=oui (pas traversable)
+    int isStartAttraction;     //savoir si la case est un emplacement pour démarrer une attraction
+    int isPlayerPos;           //savoir si le joueur est sur cette case
     
 } t_terrain;
 
 
 
 
-typedef struct minigame //structure chargée de stocker les informations d'une attraction
+typedef struct minigame  //structure chargée de stocker les informations d'une attraction
 {
-    char titre[20];   //nom
-    int difficulty;   //difficulées
+    char titre[20];     //nom
+    int difficulty;     //difficulées
     
     //specs
     
-    int coordBat[2][2]; //tab de cases prises par le bat
-    int coordPlay[2];   //coord de la case permettant de lancer le minijeu
+    int coordBat[2][2];   //tab de cases prises par le bat
+    int coordPlay[2];     //coord de la case permettant de lancer le minijeu
 
 } t_minigame;
 
