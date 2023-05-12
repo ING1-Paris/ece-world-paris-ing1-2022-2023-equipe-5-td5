@@ -157,7 +157,6 @@ int main()
         rectfill(buffer, 0 ,SCREEN_H-200, SCREEN_W, SCREEN_H, makecol(0,0,0));
         rectfill(buffer, 0+10,SCREEN_H-200+10, SCREEN_W-10, SCREEN_H-10, makecol(136,140,141)); //affichage bordereau d'information
 
-
         rectfill(buffer, 486-3, SCREEN_H-200, 486+3,  SCREEN_H, makecol(0,0,0));
         rectfill(buffer, 972-3, SCREEN_H-200, 972+3,  SCREEN_H, makecol(0,0,0));
 
@@ -237,7 +236,7 @@ t_partie taupeLa(t_partie partie, t_banqueImage image, t_banquePolice police)
     tabTaupes[12][0] = (243*5)+20;
     tabTaupes[12][1] =  (200*3)+20;
 
-    ///INITIALISATION DU STATUS DES TROUS
+   ///INITIALISATION DU STATUS DES TROUS
     for(int i=0; i<13; i++)
     {
         tabTaupes[i][2] = 1; //le trou n'as pas de taupe
@@ -329,14 +328,12 @@ t_banqueImage loadBanqueImage()
     image.fondMenu= load_bitmap("images/fondMenu.bmp", NULL);
     image.finishLine= load_bitmap("images/finishLine.bmp", NULL);
     image.taupe = load_bitmap("images/taupe.bmp", NULL);
-
     return image;
 }
 //SSPG permettant le chargement des polices dans la structure
 t_banquePolice loadBanquePolices()
 {
     t_banquePolice police;
-
     police.Pixel_11 = load_font("polices/PPixel_11.pcx", NULL, NULL);
     police.System_14 = load_font("polices/system_14.pcx", NULL, NULL);
     police.Roller_it_24 = load_font("polices/roller_it_24.pcx", NULL, NULL);
