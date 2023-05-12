@@ -194,11 +194,12 @@ int main()
 END_OF_MAIN()
 
 
+    
+    
 t_partie parisHippiques(t_partie partie, t_banqueImage image, t_banquePolice police )
 {
 
     BITMAP * buffer = create_bitmap(SCREEN_W,SCREEN_H); //déclaration du buffer
-
 
 
     int tabHorseSpeed[4]; //tableau des différentes vitesses selon les chevaux
@@ -236,9 +237,6 @@ t_partie parisHippiques(t_partie partie, t_banqueImage image, t_banquePolice pol
     }
 
 
-
-
-
     while(!key[KEY_ESC])
     {
         clear_bitmap(buffer);
@@ -264,12 +262,11 @@ t_partie parisHippiques(t_partie partie, t_banqueImage image, t_banquePolice pol
         blit(buffer,screen,0,0,0,0,SCREEN_W,SCREEN_H);
     }
 
-
-
-
-
     return partie;
 }
+
+
+
 
 void barreChargement()
 {
@@ -305,14 +302,7 @@ void barreChargement()
         sleep((rand()%50+51)/100);
     }
 
-
-
-
-
-
     clear_bitmap(buffer2x);//clear du buffer en debut de boucle
-
-
 
 }
 
@@ -329,6 +319,8 @@ t_banqueImage loadBanqueImage()
 
     return image;
 }
+
+
 
 //SSPG permettant le chargement des polices dans la structure
 t_banquePolice loadBanquePolices()
@@ -357,8 +349,6 @@ void initAllegro()
     set_color_depth(desktop_color_depth());    //initialisation de la palette de couleur
 
 
-
-
     if((set_gfx_mode(GFX_AUTODETECT_WINDOWED,SCREEN_W,SCREEN_H,0,0))!=0)      //paramètres fenêtre
     {
         //problème avec fenêtre allegro
@@ -369,27 +359,23 @@ void initAllegro()
 
     show_mouse(screen); //on affiche la souris à l'écran
 
-
-
-
 }
+
+
 
 
 int isClickInCoord(int x1, int x2, int y1, int y2)
 {
 
-
     if((mouse_x>x1 && mouse_x<x2)&&(mouse_y>y1 && mouse_y<y2)&&mouse_b&1)
     {
-
         return 1;
-
-
     }
     else return 0;
-
-
+    
 }
+
+
 
 int isClickInRadius(int x, int y, int rad)
 {
@@ -399,6 +385,7 @@ int isClickInRadius(int x, int y, int rad)
         return 1;
     }
     else return 0;
+    
 }
 
 
