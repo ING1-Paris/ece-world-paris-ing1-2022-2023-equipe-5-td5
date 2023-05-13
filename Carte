@@ -88,3 +88,12 @@ int main()
     install_keyboard();   //acces utilisation clavier
     install_mouse();      //acces utilisation souris
     set_color_depth(desktop_color_depth());   //initialisation de la palette de couleur
+    
+    if((set_gfx_mode(GFX_AUTODETECT_WINDOWED,SCREEN_W,SCREEN_H,0,0))!=0)     
+    {
+       
+        allegro_message("Pb de mode graphique");
+        allegro_exit();                                           
+        exit(EXIT_FAILURE);                                         
+    }
+
