@@ -86,6 +86,7 @@ t_partie parisHippiques(t_partie partie, t_banqueImage image, t_banquePolice pol
 int isClickInRadius(int x, int y, int rad);
 t_banqueImage loadBanqueImage();
 
+//MAIN
 
 int main()
 {
@@ -103,7 +104,7 @@ int main()
     t_banquePolice police;
 
 
-    initAllegro(); //on initialise tout le nécessaire en rapport avec allegro
+    initAllegro();   //initialisation d'allegro
 
     police = loadBanquePolices();
     image = loadBanqueImage();
@@ -118,24 +119,24 @@ int main()
     strcpy(partie.playerBase[1].name, "Valjean");
     
     
-    BITMAP * buffer = create_bitmap(SCREEN_W,SCREEN_H); //déclaration du buffer
+    BITMAP * buffer = create_bitmap(SCREEN_W,SCREEN_H);  //déclaration du buffer
 
 
 
-    int tabHorseSpeed[4]; //tableau des différentes vitesses selon les chevaux
-    int tabPlayerBet[2]; //tableau des paris des joueurs
+    int tabHorseSpeed[4];  //tableau des différentes vitesses selon les chevaux
+    int tabPlayerBet[2];   //tableau des paris des joueurs
     int temp;
-    srand(time(NULL)); //utilisation de l'aléatoire
-    int rand1, rand2; //variables utilisées pour le mélange
+    srand(time(NULL));    //aléatoire
+    int rand1, rand2;     //variables pour le mélange
 
 
-    //set la vitesse des différents chevaux
+    //vitesse des différents chevaux
     tabHorseSpeed[0]= 1;
     tabHorseSpeed[1]= 2;
     tabHorseSpeed[2]= 3;
     tabHorseSpeed[3]= 4;
 
-    //set le paris des deux joueurs à 0
+    //paris des deux joueurs à 0
     tabPlayerBet[0]=0; //pari du joueur 1
     tabPlayerBet[1]=0; //pari du joueur 2
 
