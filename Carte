@@ -76,3 +76,15 @@ typedef struct partie //structure principale chargée de stocker toutes les info
 t_banquePolice loadBanquePolices();
 t_banqueImage loadBanqueImage();
 int isClickInCoord(int x1, int x2, int y1, int y2);
+
+
+//MAIN
+
+int main()
+{
+    
+    srand(time(NULL));    //initialisation de la fonction random 
+    allegro_init();       //initialisation allegro
+    install_keyboard();   //acces utilisation clavier
+    install_mouse();      //acces utilisation souris
+    set_color_depth(desktop_color_depth());   //initialisation de la palette de couleur
