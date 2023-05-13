@@ -34,24 +34,19 @@ typedef struct banquePolice   //Structure pour stocker les polices
 
 typedef struct joueur  //structure chargée de stocker les informations d'un joueur
 {
-    char* name; //nom du joueur
-    int taillenom; //taille du nom
-    //nombre de tickets
-    int tickets;
-    //score
-    int score;
-    //couleur
-    int color;
+    char* name;       //nom du joueur
+    int taillenom;    //taille du nom
+    int tickets;      //nombre de tickets
+    int score;        //score
+    int color;        //couleur
 
 } t_joueur;
 
 
 typedef struct minigame //structure chargée de stocker les informations d'une attraction
 {
-    //nom
-    char titre[20];
-    //difficulées
-    int difficulty;
+    char titre[20];   //nom
+    int difficulty;   //difficulées
     //specs
 
     //tab de cases prises par le bat
