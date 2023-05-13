@@ -89,11 +89,11 @@ int main()
     install_mouse();      //acces utilisation souris
     set_color_depth(desktop_color_depth());   //initialisation de la palette de couleur
     
-    if((set_gfx_mode(GFX_AUTODETECT_WINDOWED,SCREEN_W,SCREEN_H,0,0))!=0)     
+    if((set_gfx_mode(GFX_AUTODETECT_WINDOWED,SCREEN_W,SCREEN_H,0,0))!=0)     //paramètres de la fenêtre
     {
-       
-        allegro_message("Pb de mode graphique");
-        allegro_exit();                                           
-        exit(EXIT_FAILURE);                                         
+       //blindage si problème avec la fenêtre allegro
+        allegro_message("Pb de mode graphique"); //indication du problème
+        allegro_exit(); //fermeture d'allegro                                          
+        exit(EXIT_FAILURE); //sortie forcée du programme                                   
     }
 
