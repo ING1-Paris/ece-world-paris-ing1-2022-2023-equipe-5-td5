@@ -39,13 +39,7 @@ typedef struct partie //structure principale chargée de stocker toutes les info
     int terrain[10][10]; //terrain en 10 par 10
     int posJoueur[2];//matrice 2:1 stockant la position des joueurs sur la carte
     int tabHighScore[3]; //tableau stockant les meilleurs scores de tout les temps
-
-
-
-
 }t_partie;
-
-
 
 
 
@@ -57,8 +51,6 @@ typedef struct banqueImage //  Structure utilisée pour stocker les images utili
     BITMAP * finishLine; // lgne d'arrivée de la course hippique
     BITMAP * taupe; //taupe
     BITMAP * cheval; //cheval paris hippique
-
-
 
 }t_banqueImage;
 
@@ -192,9 +184,7 @@ void menuPrincipal(t_partie partie, t_banqueImage image, t_banquePolice police)
                     rectfill(buffer, 50+100*i, 235+200*i, 400+100*i, 300+200*i, makecol(4, 45, 148)); //on réaffiche la case en bleu foncé
 
                 }
-
             }
-
         }
 
         ///----------------------------------AFFICHAGE OPTIONS MENU----------------------------------///
@@ -210,17 +200,9 @@ void menuPrincipal(t_partie partie, t_banqueImage image, t_banquePolice police)
         textout_centre_ex(buffer,police.Hudson_26, "Quitter", 425, 635, makecol(95, 137, 140), -1);
 
 
-
-
-
-
         blit(buffer, screen, 0,0,0,0, SCREEN_W,SCREEN_H); //on affiche le contenu du buffer à l'écran
 
-
-
     }
-
-
     ///résultats du choix
     switch(choix)
     {
@@ -238,22 +220,11 @@ void menuPrincipal(t_partie partie, t_banqueImage image, t_banquePolice police)
     case 3:
         exit(0);
         break;
-
-
-
-
     }
-
-
 }
-
-
-
 
 void nouvellePartie(t_partie partie, t_banqueImage image, t_banquePolice police)
 {
-
-
     srand(time(NULL)); //utilisation de l'aléatoire
     int rando; //décla d'une variable utilisée pour stocker l'aléatoire
 
@@ -302,9 +273,6 @@ void nouvellePartie(t_partie partie, t_banqueImage image, t_banquePolice police)
     partie.posJoueur[1]=8; //8
 
 
-
-
-
     ///mélange de l'ordre de jeu des joueurs
     rando = (rand()% 2); //entier aléatoire entre 0 et 1
     if(rando %2) // 1 chance sur 2
@@ -317,9 +285,6 @@ void nouvellePartie(t_partie partie, t_banqueImage image, t_banquePolice police)
 
     partie.playerBase[0].color=makecol(17,75,200);
     partie.playerBase[1].color=makecol(129,30,30);
-
-
-
 
 
     //on lance la boucle de jeu
