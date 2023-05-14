@@ -291,3 +291,283 @@ void nouvellePartie(t_partie partie, t_banqueImage image, t_banquePolice police)
     boucleDeJeu( partie,  image,  police);
 
 }
+
+
+/*
+    Sous programme chargé de l'affichage temporaire de l'écran de saisie des pseudos
+    afin que l'écran ne soit pas bloqué sur l'écran précédent en attendant que l'utilisateur
+    commence la saisie du pseudo
+*/
+void affTempoSaisiePseudo(int playerCount, t_banqueImage image, t_banquePolice police)
+{
+    int wait=0;//on crée une variable arbitraire
+
+    BITMAP * buffer2x; //Déclaration du buffer
+    buffer2x=create_bitmap(SCREEN_W,SCREEN_H);//creation du bitmap buffer double
+
+
+    while(wait<15) //on attends juste que l'affichage se fasse
+    {
+
+        clear_bitmap(buffer2x);//clear du buffer en debut de boucle
+
+        blit(image.fondMenu,buffer2x,0,0,0,0,SCREEN_W,SCREEN_H);//affichage du decor du menu sur le buffer
+
+
+        rectfill(buffer2x, SCREEN_W/4-10, 20-10+50, (SCREEN_W*3)/4+10, 95+10+50, makecol(66,40,14));
+        rectfill(buffer2x, SCREEN_W/4, 20+50, (SCREEN_W*3)/4, 95+50, makecol(150,150,150));//carré fond rouge pour le titre de la page
+
+
+        textprintf_centre_ex(buffer2x, police.Hudson_26, SCREEN_W/2-5, 20+50,makecol(0,0,0), -1, "Saisie pseudo joueur #%d",playerCount); //on idique le pseudo de quel joueur on choisit
+        textprintf_centre_ex(buffer2x, police.Hudson_26, SCREEN_W/2, 20+50,makecol(255,255,255), -1, "Saisie pseudo joueur #%d",playerCount); //on idique le pseudo de quel joueur on choisit
+
+
+
+
+
+        //afficher continuer
+         rectfill(buffer2x, SCREEN_W/4-10, 385-10+200, (SCREEN_W*3)/4+10, 455+10+200, makecol(66,40,14));//carré fond blanc pour la saisie du name
+        rectfill(buffer2x, SCREEN_W/4, 385+200, (SCREEN_W*3)/4, 455+200, makecol(150,150,150));//carré fond blanc pour la saisie du name
+
+
+        textout_centre_ex(buffer2x, police.Hudson_26, "ENTRER pour continuer", SCREEN_W/2-5, 385+200, makecol(0,0,0), -1);
+        textout_centre_ex(buffer2x, police.Hudson_26, "ENTRER pour continuer", SCREEN_W/2, 385+200, makecol(255,255,255), -1);
+
+
+
+        //Afficher pseudo
+        rectfill(buffer2x, (SCREEN_W)/3-8, 235-8+100, (SCREEN_W*2)/3+8, 310+8+100, makecol(0,0,0));
+        rectfill(buffer2x, (SCREEN_W)/3, 235+100, (SCREEN_W*2)/3, 310+100, makecol(255,255,255));//carré fond blanc pour la saisie du pseudo
+
+
+
+        blit(buffer2x,screen,0,0,0,0,SCREEN_W,SCREEN_H);//affichage du double buffer sur l'écran
+
+        wait++;
+    }
+
+
+}
+
+
+
+
+/*
+    Sous programme chargé du remplissage des informations de chaque joueurs
+    Procède à la saisie par clavier d'un pseudo
+*/
+
+
+t_joueur remplirJoueur(int playerCount, t_banqueImage image, t_banquePolice police)
+{
+
+    BITMAP * buffer2x; //Déclaration du buffer
+    buffer2x=create_bitmap(SCREEN_W,SCREEN_H);//creation du bitmap buffer double
+
+
+
+
+
+
+    t_joueur joueurSaisie; //on déclare la structure qu'on va remplir
+
+    char saisie[20];
+    int proceed=0;
+    int charCnt=0;//variable utilisée pour compter le nombre de lettre actuellement présente dans le pseudo
+    int tailleMax=15;
+    int SaisieTouche;//variable de la touche saisie
+    int SaisieToucheASCII, SaisieToucheScancode;
+
+    clear_keybuf();//on nettoye le buffer du clavier
+
+
+
+
+    //Saisie du pseudo
+
+    while(!proceed)
+    {
+
+        clear_bitmap(buffer2x);//clear du buffer en debut de boucle
+
+        blit(image.fondMenu,buffer2x,0,0,0,0,SCREEN_W,SCREEN_H);//affichage du decor du menu sur le buffer
+
+        rectfill(buffer2x, SCREEN_W/4-10, 20-10+50, (SCREEN_W*3)/4+10, 95+10+50, makecol(66,40,14));
+        rectfill(buffer2x, SCREEN_W/4, 20+50, (SCREEN_W*3)/4, 95+50, makecol(150,150,150));//carré fond rouge pour le titre de la page
+
+
+        textprintf_centre_ex(buffer2x, police.Hudson_26, SCREEN_W/2-5, 20+50,makecol(0,0,0), -1, "Saisie pseudo joueur #%d",playerCount); //on idique le pseudo de quel joueur on choisit
+        textprintf_centre_ex(buffer2x, police.Hudson_26, SCREEN_W/2, 20+50,makecol(255,255,255), -1, "Saisie pseudo joueur #%d",playerCount); //on idique le pseudo de quel joueur on choisit
+
+
+
+
+
+        //saisie pseudo
+
+        if(keypressed())
+        {
+            SaisieTouche=readkey();//lecture de la touche
+            SaisieToucheASCII=SaisieTouche & 0xFF; //conversion en code ASCII
+            SaisieToucheScancode=SaisieTouche  >> 8; //code numerique de la touche saisie (scancode)
+
+            if (( SaisieToucheASCII>64 && SaisieToucheASCII<91) || ( (SaisieToucheASCII>96 && SaisieToucheASCII<122)&&(charCnt<tailleMax))) //on teste si la touche appuyée est une lettre
+            {
+
+
+                saisie[charCnt]=SaisieToucheASCII;//met a la bonne position la touche pressée ASCII
+                saisie[charCnt+1]= '\0';
+                charCnt++;
+
+
+            }
+
+            else if ( SaisieToucheScancode ==KEY_BACKSPACE && (charCnt>0))//effacer une lettre
+            {
+                saisie[charCnt]= '\0';
+                charCnt--;
+                if ( charCnt<0 )
+                {
+                    charCnt=0;
+                }
+
+
+            }
+
+
+            //afficher continuer
+         rectfill(buffer2x, SCREEN_W/4-10, 385-10+200, (SCREEN_W*3)/4+10, 455+10+200, makecol(66,40,14));//carré fond blanc pour la saisie du name
+        rectfill(buffer2x, SCREEN_W/4, 385+200, (SCREEN_W*3)/4, 455+200, makecol(150,150,150));//carré fond blanc pour la saisie du name
+
+
+        textout_centre_ex(buffer2x, police.Hudson_26, "ENTRER pour continuer", SCREEN_W/2-5, 385+200, makecol(0,0,0), -1);
+        textout_centre_ex(buffer2x, police.Hudson_26, "ENTRER pour continuer", SCREEN_W/2, 385+200, makecol(255,255,255), -1);
+
+
+
+
+            if (SaisieToucheScancode==KEY_ENTER && charCnt != 0 )//on teste si l'user appuie sur la touche enter ET qu'il a saisie au moins une lettre du name
+            {
+                proceed =1; //si oui, on continue
+                joueurSaisie.taillenom=strlen(saisie);
+                joueurSaisie.name = malloc(sizeof(char)*joueurSaisie.taillenom);
+                strcpy(joueurSaisie.name, saisie);
+
+
+            }
+
+
+            clear_keybuf();//nettoyer le buffer du clavier
+
+            //Afficher pseudo
+            rectfill(buffer2x, (SCREEN_W)/3-8, 235-8+100, (SCREEN_W*2)/3+8, 310+8+100, makecol(0,0,0));
+            rectfill(buffer2x, (SCREEN_W)/3, 235+100, (SCREEN_W*2)/3, 310+100, makecol(255,255,255));//carré fond blanc pour la saisie du pseudo
+
+
+
+
+
+
+            textprintf_centre_ex(buffer2x,police.Hudson_26,SCREEN_W/2,235+100,makecol(0, 0, 0),-1,"%s",saisie); //on affiche le name en cour de saisie
+
+
+
+
+
+
+
+
+
+
+            blit(buffer2x,screen,0,0,0,0,SCREEN_W,SCREEN_H);//affichage du double buffer sur l'écran
+        }
+
+    }
+
+    joueurSaisie.tickets=5;//on initialise le nombre de tickets du joueur à 5
+    for(int i=0; i<3; i++)
+    {
+        joueurSaisie.score[i]=-1;//on initialise tout les scores à -1 pour signifier qu'on y a pas encore joué
+    }
+
+    return joueurSaisie; //on retourne la structure remplie
+}
+
+
+//-------------------SYSTEME
+
+
+//SSPG chargé de l'initialisation des fonctions relatives à allegro
+void initAllegro()
+{
+
+    srand(time(NULL)); //on initialise la fonction random (utile pour plus tard)
+    allegro_init();    //initialisation allegro
+    install_keyboard(); //on permet l'utilisation du clavier
+    install_mouse();  //on permet l'utilisation de la souris
+    set_color_depth(desktop_color_depth());    //initialisation de la palette de couleur
+
+
+    //on initialise les fonctions de son
+    if (install_sound(DIGI_AUTODETECT, MIDI_NONE, 0) != 0) {
+        printf("Error initialising sound: %s\n", allegro_error);
+        exit(1);
+    }
+
+    if((set_gfx_mode(GFX_AUTODETECT_WINDOWED,SCREEN_W,SCREEN_H,0,0))!=0)      //paramètres fenêtre
+    {
+        //problème avec fenêtre allegro
+        allegro_message("Pb de mode graphique");
+        allegro_exit();                                             //fermeture allegro
+        exit(EXIT_FAILURE);                                         //sortie forcée du programme
+    }
+
+    show_mouse(screen); //on affiche la souris à l'écran
+
+
+
+
+}
+
+
+//SSPG chargé d'initialiser les données d'une nouvelle partie
+t_partie initPartie()
+{
+    t_partie partie;
+
+
+
+
+    partie.playerBase[0].color = makecol(184,56,59);   //rouge
+
+
+
+    partie.playerBase[1].color = makecol(37,109, 141);    //bleu
+
+
+
+
+
+
+    return partie;
+}
+
+
+//SSPG permettant le chargement des images dans la structure
+t_banqueImage loadBanqueImage()
+{
+    t_banqueImage image;
+
+    image.fondMenu= load_bitmap("images/fondMenu.bmp", NULL);
+    image.finishLine= load_bitmap("images/finishLine.bmp", NULL);
+    image.taupe = load_bitmap("images/taupe.bmp", NULL);
+    image.joueur= load_bitmap("images/joueur.bmp", NULL);
+    image.cheval=load_bitmap("images/cheval.bmp", NULL);
+
+    image.batMinigame[0] = load_bitmap("images/batBallon.bmp", NULL);
+    image.batMinigame[1] = load_bitmap("images/batCheval.bmp", NULL);
+    image.batMinigame[2] = load_bitmap("images/batTaupe.bmp", NULL);
+
+    return image;
+}
+
