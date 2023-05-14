@@ -155,7 +155,7 @@ int main()
 END_OF_MAIN()
 
 
-t_partie tirAuBallon(t_partie partie, t_banqueImage image, t_banquePolice police )
+t_partie tirAuBallon(t_partie partie, t_banqueImage image, t_banquePolice police)
 {
 
     BITMAP * buffer = create_bitmap(SCREEN_W,SCREEN_H); //déclaration du buffer
@@ -348,7 +348,7 @@ t_banquePolice loadBanquePolices()
 void initAllegro()
 {
 
-    srand(time(NULL)); //on initialise la fonction random (utile pour plus tard)
+    srand(time(NULL)); //on initialise la fonction random 
     allegro_init();    //initialisation allegro
     install_keyboard(); //on permet l'utilisation du clavier
     install_mouse();  //on permet l'utilisation de la souris
