@@ -1,0 +1,328 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <allegro.h>
+#include <math.h>
+#include <string.h>
+#include <time.h>
+
+
+#define SCREEN_W 1500 //largeur de la fenêtre allegro
+#define SCREEN_H 1000  //hauteur de la fenêtre allegro
+
+
+///--------------------STRUCTURES---------------------------///
+
+
+typedef struct joueur //structure chargée de stocker les informations d'un joueur
+{
+    //nom
+    char* name; //nom du joueur
+    //taille du nom
+    int taillenom;
+    //nombre de tickets
+    int tickets;
+    //score du joueur sur les différents minijeux
+    int score[3]; //0- temps du tir au ballon || 1-nb victoires au paris hippiques || 2-score au taupe là
+    //couleur
+    int color; //joueur1 = makecol(17,75,200) #bleu joueur 2 = makecol(129,30,30) #rouge
+
+}t_joueur;
+
+
+
+
+typedef struct partie //structure principale chargée de stocker toutes les infos de la partie
+{
+    //tab de 2 joueurs
+    t_joueur playerBase[2];
+
+    int terrain[10][10]; //terrain en 10 par 10
+    int posJoueur[2];//matrice 2:1 stockant la position des joueurs sur la carte
+    int tabHighScore[3]; //tableau stockant les meilleurs scores de tout les temps
+
+
+
+
+}t_partie;
+
+
+
+
+
+typedef struct banqueImage //  Structure utilisée pour stocker les images utilisées pour le projet
+{
+    BITMAP * fondMenu; //fond du menu principal
+    BITMAP * joueur; // sprite du joueur
+    BITMAP * batMinigame[3]; //batiments représentant les mini jeux
+    BITMAP * finishLine; // lgne d'arrivée de la course hippique
+    BITMAP * taupe; //taupe
+    BITMAP * cheval; //cheval paris hippique
+
+
+
+}t_banqueImage;
+
+
+typedef struct banquePolice //  Structure utilisée pour stocker les polices utilisées pour le projet
+{
+    FONT * Roller_72;
+    FONT * Roller_it_24;
+    FONT * Pixel_11;
+    FONT * System_14;
+    FONT * Hudson_26;
+    FONT * Hudson_big;
+
+}t_banquePolice;
+
+
+///--------------------- SOUS-PROGS -----------------------///
+
+//-------- Système -------//
+void initAllegro(); //SSPG chargé d'initialiser les fonctions d'allegro
+t_banqueImage loadBanqueImage(); //SSPG chargé d'initaliser et de charger les différentes images dans la structure de stockage
+t_banquePolice loadBanquePolices();//idem mais pour les polices d'"critures utilisées
+t_partie initPartie(); //SSPG chargé d'initialiser les données d'une nouvelles parties
+int isClickInCoord(int x1, int x2, int y1, int y2);
+int isClickInRadius(int x, int y, int rad);
+
+//---------Menu-----------//
+void menuPrincipal(t_partie partie, t_banqueImage image, t_banquePolice police); //SSPG chargé de l'affichage du menu principal et d'enregistrer le choix du joueur
+void nouvellePartie(t_partie partie, t_banqueImage image, t_banquePolice police);
+t_joueur remplirJoueur(int playerCount, t_banqueImage image, t_banquePolice police);
+void affTempoSaisiePseudo(int playerCount, t_banqueImage image, t_banquePolice police);
+
+
+//---------BDJ-------------//
+void boucleDeJeu(t_partie partie, t_banqueImage image, t_banquePolice police);
+void afficherCarte(BITMAP * buffer, t_banquePolice police, t_banqueImage image, t_partie partie, int posJoueur[2]);
+void afficherClassement( t_partie partie, t_banqueImage image, t_banquePolice police, int prov);
+
+
+
+///-------------------------MAIN--------------------------///
+
+
+
+
+int main()
+{
+    ///DECLARATION DES STRUCTURE PRINCIPALES
+    t_banqueImage banqueImage;
+    t_banquePolice banquePolice;
+    t_partie partie;
+
+
+    initAllegro(); //on initialise tout le nécessaire en rapport avec allegro
+
+    banqueImage = loadBanqueImage(); //on charge les images utilisées dans la structure
+    banquePolice = loadBanquePolices(); //idem avec les polices
+    partie = initPartie();
+    //initialisation de la carte
+
+
+    while(!key[KEY_ESC]) //boucle de jeu
+    {
+        //menu principal
+        menuPrincipal(partie, banqueImage, banquePolice);
+    }
+
+
+    return 0;
+}
+END_OF_MAIN()
+
+
+
+///--------------------- SOUS-PROGS -----------------------///
+
+
+//--------------MENU
+
+/*
+    SSPG chargé d'afficher les options du menu principal et
+    d'enregistrer le choix du joueur
+*/
+void menuPrincipal(t_partie partie, t_banqueImage image, t_banquePolice police)
+{
+    //déclaration des différentes variables
+    int choix=0; //variable pour stocker le choix du joueur, initialisée à 0
+
+    BITMAP * buffer; //on utilise un buffer pour un affichage plus fluide
+    buffer=create_bitmap(SCREEN_W,SCREEN_H);
+
+
+    ///choix du joueur
+    while(choix==0)
+    {
+        clear_bitmap(buffer); //on vide le buffer
+
+        blit(image.fondMenu, buffer, 0,0,0,0,SCREEN_W,SCREEN_H); //on affiche l'image de fond sur le buffer
+
+
+        ///-------------------------------------AFFICHAGE TITRE DU JEU----------------------------------------------///
+
+        textout_centre_ex(buffer, police.Hudson_big, "ECE", (SCREEN_W*5)/6-25+6, SCREEN_H/10+2,  makecol(0,0,0), -1 );
+        textout_centre_ex(buffer, police.Hudson_big, "World", (SCREEN_W*5)/6+25+6, SCREEN_H/10+75+2,  makecol(0,0,0), -1 );
+
+        textout_centre_ex(buffer, police.Hudson_big, "ECE", (SCREEN_W*5)/6-25, SCREEN_H/10, makecol(255,255,255), -1 );
+        textout_centre_ex(buffer, police.Hudson_big, "World", (SCREEN_W*5)/6+25, SCREEN_H/10+75, makecol(250,218,94), -1 );
+
+
+
+        ///-------------------------------------AFFICHAGE CASES CHOIX MENU----------------------------------------------///
+
+        for(int i=0; i<3; i++) //on boucle pour chaque case du tableau
+        {
+            rectfill(buffer, 50+100*i, 235+200*i, 400+100*i, 300+200*i, makecol(171, 224, 215));//on dessine une case bleu ciel
+
+            //bords noir des cases
+            rectfill(buffer, 45+100*i,230+200*i, 405+100*i, 235+200*i,  makecol(0,0,0)); //haut de la case
+            rectfill(buffer, 45+100*i,230+200*i, 50+100*i, 305+200*i,  makecol(0,0,0)); //gauche de la case
+            rectfill(buffer, 400+100*i, 230+200*i, 405+100*i, 305+200*i,  makecol(0,0,0)); //droit de la case
+            rectfill(buffer, 45+100*i, 300+200*i, 405+100*i, 305+200*i,  makecol(0,0,0)); //bas de la case
+
+
+            if((mouse_x > 50+100*i)&&(mouse_x<400+100*i)&&(mouse_y>235+200*i)&&(mouse_y<300+200*i)) //si le joueur passe son curseur sur une case
+            {
+                rectfill(buffer, 50+100*i, 235+200*i, 400+100*i, 300+200*i, makecol(34, 101, 140));//on affiche la case ensurbrillance bleu gris
+
+                if(mouse_b==1)//si il clique sur la case
+                {
+                    choix=i+1; //on set le choix correspondant
+                    rectfill(buffer, 50+100*i, 235+200*i, 400+100*i, 300+200*i, makecol(4, 45, 148)); //on réaffiche la case en bleu foncé
+
+                }
+
+            }
+
+        }
+
+        ///----------------------------------AFFICHAGE OPTIONS MENU----------------------------------///
+
+
+        textout_centre_ex(buffer, police.Hudson_26, "Nouvelle Partie", 224-1, 234+2,  makecol(0,0,0), -1);
+        textout_centre_ex(buffer, police.Hudson_26, "Classement", 324-1, 434+2,  makecol(0,0,0), -1);
+        textout_centre_ex(buffer, police.Hudson_26, "Quitter", 424-1, 634+2,  makecol(0,0,0), -1);
+
+        //on affiche les textes des différentes options du menu
+        textout_centre_ex(buffer, police.Hudson_26, "Nouvelle Partie", 225, 235, makecol(95, 137, 140), -1);
+        textout_centre_ex(buffer, police.Hudson_26, "Classement", 325, 435, makecol(95, 137, 140), -1);
+        textout_centre_ex(buffer,police.Hudson_26, "Quitter", 425, 635, makecol(95, 137, 140), -1);
+
+
+
+
+
+
+        blit(buffer, screen, 0,0,0,0, SCREEN_W,SCREEN_H); //on affiche le contenu du buffer à l'écran
+
+
+
+    }
+
+
+    ///résultats du choix
+    switch(choix)
+    {
+    //nouvelle partie
+    case 1:
+        nouvellePartie(partie, image, police);
+        break;
+
+   //classement
+    case 2:
+        afficherClassement(partie, image, police, -1);
+        break;
+
+    //quitter le jeu
+    case 3:
+        exit(0);
+        break;
+
+
+
+
+    }
+
+
+}
+
+
+
+
+void nouvellePartie(t_partie partie, t_banqueImage image, t_banquePolice police)
+{
+
+
+    srand(time(NULL)); //utilisation de l'aléatoire
+    int rando; //décla d'une variable utilisée pour stocker l'aléatoire
+
+    t_joueur jTemp; //structure de joueur servant de stockage pour un tri
+
+    ///SAISIE DES PSEUDOS ET INITIALISATION DES INFOS
+    for(int i=0; i<2; i++) //on boucle l'affichage/saisie des pseudos pour le nombre de joueurs
+    {
+        affTempoSaisiePseudo(i+1, image, police); //affichage temporaire de la saisir des pseudo
+        partie.playerBase[i] = remplirJoueur(i+1, image, police); //on saisie le pseudo du joueur
+    }
+
+
+    for(int i=0; i<10; i++) //pour toutes les cases de la carte
+    {
+        for(int j=0; j<10; j++)
+        {
+            partie.terrain[i][j]=0;
+        }
+    }
+
+    //assignation des batiments et zones de jeu
+    //tir au ballon
+    partie.terrain[3][1]=1;
+    partie.terrain[3][2]=1;
+    partie.terrain[4][1]=1;
+    partie.terrain[4][2]=1;
+    partie.terrain[4][3]=11;
+
+    //paris hippiques
+    partie.terrain[2][6]=2;
+    partie.terrain[2][7]=2;
+    partie.terrain[3][6]=2;
+    partie.terrain[3][7]=2;
+    partie.terrain[4][6]=22;
+
+    //taupe la
+    partie.terrain[7][4]=3;
+    partie.terrain[7][5]=3;
+    partie.terrain[8][4]=3;
+    partie.terrain[8][5]=3;
+    partie.terrain[6][4]=33;
+
+
+    partie.posJoueur[0]=5; //5
+    partie.posJoueur[1]=8; //8
+
+
+
+
+
+    ///mélange de l'ordre de jeu des joueurs
+    rando = (rand()% 2); //entier aléatoire entre 0 et 1
+    if(rando %2) // 1 chance sur 2
+    {
+        jTemp= partie.playerBase[0]; //on intervertis les deux joueurs
+        partie.playerBase[0]= partie.playerBase[1];
+        partie.playerBase[1]= jTemp;
+
+    }
+
+    partie.playerBase[0].color=makecol(17,75,200);
+    partie.playerBase[1].color=makecol(129,30,30);
+
+
+
+
+
+    //on lance la boucle de jeu
+    boucleDeJeu( partie,  image,  police);
+
+}
