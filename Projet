@@ -563,6 +563,8 @@ t_banqueImage loadBanqueImage()
     image.taupe = load_bitmap("images/taupe.bmp", NULL);
     image.joueur= load_bitmap("images/joueur.bmp", NULL);
     image.cheval=load_bitmap("images/cheval.bmp", NULL);
+    
+    
 
     image.batMinigame[0] = load_bitmap("images/batBallon.bmp", NULL);
     image.batMinigame[1] = load_bitmap("images/batCheval.bmp", NULL);
@@ -571,3 +573,17 @@ t_banqueImage loadBanqueImage()
     return image;
 }
 
+//SSPG permettant le chargement des polices dans la structure
+t_banquePolice loadBanquePolices()
+{
+    t_banquePolice police;
+
+
+    police.Pixel_11 = load_font("polices/PPixel_11.pcx", NULL, NULL);
+    police.System_14 = load_font("polices/system_14.pcx", NULL, NULL);
+    police.Roller_it_24 = load_font("polices/roller_it_24.pcx", NULL, NULL);
+    police.Roller_72 = load_font("polices/roller_72.pcx", NULL, NULL);
+    police.Hudson_26 = load_font("polices/hudson_party_26.pcx", NULL, NULL);
+    police.Hudson_big = load_font("polices/hudson_big.pcx", NULL, NULL);
+    return police;
+}
