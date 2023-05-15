@@ -96,4 +96,26 @@ int main()
         allegro_exit(); //fermeture d'allegro                                          
         exit(EXIT_FAILURE); //sortie forcée du programme                                   
     }
+    
+    show_mouse(screen); //on affiche la souris à l'écran
+
+    BITMAP * buffer = create_bitmap(SCREEN_W,SCREEN_H); //déclaration du buffer
+
+    t_banquePolice police = loadBanquePolices();
+    t_banqueImage image = loadBanqueImage();
+    t_partie partie;
+
+    int choix=0;
+    int actionJoueur=0;
+
+
+    int terrain[10][10];
+
+    for(int i=0; i<10; i++) //pour toutes les cases de la carte
+    {
+        for(int j=0; j<10; j++)
+        {
+            terrain[i][j]=0;
+        }
+    }
 
