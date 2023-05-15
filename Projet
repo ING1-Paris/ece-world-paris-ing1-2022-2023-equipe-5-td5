@@ -610,3 +610,96 @@ int isClickInRadius(int x, int y, int rad)
     }
     else return 0;
 }
+
+//-------------BOUCLE DE JEU
+
+
+void boucleDeJeu(t_partie partie, t_banqueImage image, t_banquePolice police)
+{
+
+
+    BITMAP * buffer = create_bitmap(SCREEN_W,SCREEN_H); //déclaration du buffer
+
+
+    int choix=0;
+    int actionJoueur=0;
+
+
+
+    while(actionJoueur==0)
+    {
+        clear_bitmap(buffer);
+        afficherCarte(buffer,  police, image, partie, partie.posJoueur);
+
+        for(int i=0; i<3; i++)
+        {
+            if(isClickInCoord(1150+5,1450-5, 500+165*i+5,645+165*i-5)) choix=i+1;  //on détecte un éventuel click
+        }
+
+        switch (choix) //on regarde le choix du joueur
+        {
+        case 1:
+            actionJoueur=1; //on quitte la partie
+            break;
+
+        case 2:
+            actionJoueur=2; //on affiche le classement
+            break;
+
+        case 3 :
+            switch(partie.terrain[partie.posJoueur[0]][partie.posJoueur[1]]) //on regarde la case de la où on se trouve
+            {
+            case 11: //si c'est le lancement du jeu 1
+                actionJoueur=11;
+                break;
+
+            case 22: //si c'est le lancement du jeu 2
+                actionJoueur=22;
+                break;
+
+            case 33: //si c'est le lancement du jeu 3
+                actionJoueur=33;
+                break;
+
+
+            default: //si c'est une case lambda
+                choix=0; //on remet le choix à 0
+                break;
+            }
+            break;
+
+        }
+
+        blit(buffer, screen, 0,0, 0,0,SCREEN_W,SCREEN_H);//on affiche le contenu du buffer à l'écran
+    }
+
+    switch(actionJoueur)
+    {
+    case 1:
+        //sauvegarder et quitter*
+        //on compare les scores de la partie aux meilleurs score et on sauvegarde les meilleurs scores
+        menuPrincipal(partie, image, police);
+        break;
+
+    case 2:
+        //classement
+        afficherClassement(partie,image, police, 1);
+        break;
+
+    case 11:
+        //lancer tir au ballon
+        break;
+
+    case 22:
+        //lancer paris hippiques
+        break;
+
+    case 33:
+        //lancer taupe là
+        break;
+
+    }
+
+}
+
+
