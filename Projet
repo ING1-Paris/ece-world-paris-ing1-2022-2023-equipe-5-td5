@@ -587,3 +587,16 @@ t_banquePolice loadBanquePolices()
     police.Hudson_big = load_font("polices/hudson_big.pcx", NULL, NULL);
     return police;
 }
+//SSPG permattant de détecter si l'on clique à l'intérieur d'un carré donné
+int isClickInCoord(int x1, int x2, int y1, int y2)
+{
+
+
+    if((mouse_x>x1 && mouse_x<x2)&&(mouse_y>y1 && mouse_y<y2)&&mouse_b&1)
+    {
+                return 1;
+
+    }
+    else return 0;
+
+}
