@@ -598,5 +598,15 @@ int isClickInCoord(int x1, int x2, int y1, int y2)
 
     }
     else return 0;
+}
 
+//SSPG permettant de détecter si on clique dans un certains rayon d'un point
+int isClickInRadius(int x, int y, int rad)
+{
+
+    if(mouse_b&1 && (rad>= sqrt(pow(x-mouse_x,2)+pow(y-mouse_y, 2))) )
+    {
+        return 1;
+    }
+    else return 0;
 }
