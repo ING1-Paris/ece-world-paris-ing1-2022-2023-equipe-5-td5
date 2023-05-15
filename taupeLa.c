@@ -254,7 +254,36 @@ t_partie taupeLa(t_partie partie, t_banqueImage image, t_banquePolice police)
     {
         partie.playerBase[i].tickets--; //on retire un ticket à chaque joueur
     }
+for(int pTurn=0; pTurn<2; pTurn++)
+    {
+        ///DEBUT DU JEU
 
+        //INITIALISATION DU STATUS DES TROUS
+        for(int i=0; i<13; i++)
+        {
+            tabTaupes[i][2] = 0; //le trou n'as pas de taupe
+        }
+        //initialisation du score du joueur à 0
+        playerScore[pTurn]=0;
+
+        loadStartGame(police, partie,3, pTurn );
+
+        ///DEROULEMENT DU JEU
+
+        //remise à 0 du temps
+        start_time = time(NULL);
+        elapsed_time = 0;
+        tick = 0;
+
+
+        while(elapsed_time < duration)
+        {
+            clear_bitmap(buffer);
+
+            remaining_time = duration - elapsed_time;
+            elapsed_time = time(NULL) - start_time;
+//------------------------à continuer affichage-------------------------------
+            
    ///INITIALISATION DU STATUS DES TROUS
     for(int i=0; i<13; i++)
     {
