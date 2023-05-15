@@ -92,7 +92,14 @@ int main()
     police = loadBanquePolices();
     image = loadBanqueImage();
    // barreChargement();
-
+    
+    partie=taupeLa(partie, image, police);
+    return 0;
+    
+}END_OF_MAIN()
+    
+t_partie taupeLa(t_partie partie, t_banqueImage image, t_banquePolice police)
+{
    int score=0;
 
     BITMAP * buffer = create_bitmap(SCREEN_W,SCREEN_H); //déclaration du buffer
@@ -235,6 +242,18 @@ t_partie taupeLa(t_partie partie, t_banqueImage image, t_banquePolice police)
 
     tabTaupes[12][0] = (243*5)+20;
     tabTaupes[12][1] =  (200*3)+20;
+    
+    
+    time_t start_time = time(NULL);  // Temps de départ
+    time_t elapsed_time = 0;         // Temps écoulé
+    time_t duration = 15;            // Durée du round
+    time_t remaining_time; //vairable de temps utilisée pour afficher le temps restant
+    time_t tick; //variable utilisée pour détecter des actions dans le temps
+
+    for(int i=0; i<2; i++)
+    {
+        partie.playerBase[i].tickets--; //on retire un ticket à chaque joueur
+    }
 
    ///INITIALISATION DU STATUS DES TROUS
     for(int i=0; i<13; i++)
