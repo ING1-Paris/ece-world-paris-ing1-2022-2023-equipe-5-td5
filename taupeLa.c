@@ -202,6 +202,7 @@ t_partie taupeLa(t_partie partie, t_banqueImage image, t_banquePolice police)
     int score=0;
     BITMAP * buffer = create_bitmap(SCREEN_W,SCREEN_H); //déclaration du buffer
     int tabTaupes[13][3]; //tableau d'entier en 13x3, 2 coords pour chaque emplacement + un indicateur si la taupe s'affiche
+    int playerScore[2];
 
     ///COORDONNEES DES TROUS DE TAUPES
     tabTaupes[0][0] = (243*1)+20;
@@ -282,57 +283,94 @@ for(int pTurn=0; pTurn<2; pTurn++)
 
             remaining_time = duration - elapsed_time;
             elapsed_time = time(NULL) - start_time;
-//------------------------à continuer affichage-------------------------------
             
-   ///INITIALISATION DU STATUS DES TROUS
-    for(int i=0; i<13; i++)
-    {
-        tabTaupes[i][2] = 1; //le trou n'as pas de taupe
-    }
-    int flip=1;
-     while(!key[KEY_ESC])
-    {
-        clear_bitmap(buffer);
-        printf("%d ", score);
+ 
+            ///AFFICHAGE INTERFACE
+            rectfill(buffer, 0,0, SCREEN_W, SCREEN_H, makecol(203,32,38)); //affichage des bords
+            rectfill(buffer, 20,20, SCREEN_W-20, SCREEN_H-20, makecol(114,95,79)); //affichage du fond
 
-        ///AFFICHAGE INTERFACE
-        rectfill(buffer, 0,0, SCREEN_W, SCREEN_H, makecol(203,32,38)); //affichage des bords
-        rectfill(buffer, 20,20, SCREEN_W-20, SCREEN_H-20, makecol(114,95,79)); //affichage du fond
-
-        rectfill(buffer, 0 ,SCREEN_H-200, SCREEN_W, SCREEN_H, makecol(0,0,0));
-        rectfill(buffer, 0+10,SCREEN_H-200+10, SCREEN_W-10, SCREEN_H-10, makecol(136,140,141)); //affichage bordereau d'information
+            rectfill(buffer, 0,SCREEN_H-200, SCREEN_W, SCREEN_H, makecol(0,0,0));
+            rectfill(buffer, 0+10,SCREEN_H-200+10, SCREEN_W-10, SCREEN_H-10, makecol(136,140,141)); //affichage bordereau d'information
 
 
-        rectfill(buffer, 486-3, SCREEN_H-200, 486+3,  SCREEN_H, makecol(0,0,0));
-        rectfill(buffer, 972-3, SCREEN_H-200, 972+3,  SCREEN_H, makecol(0,0,0));
+            rectfill(buffer, 486-3, SCREEN_H-200, 486+3,  SCREEN_H, makecol(0,0,0)); //délimitation des cases
+            rectfill(buffer, 972-3, SCREEN_H-200, 972+3,  SCREEN_H, makecol(0,0,0));
 
-        ///AFFICHAGE TROUS TAUPES
-        for(int i=0; i<13; i++)
-        {
-            circlefill(buffer, tabTaupes[i][0], tabTaupes[i][1], 75, makecol(0,0,0));
-            if(tabTaupes[i][2]==1)
+            //tour du joueur actuel
+            textout_centre_ex(buffer, police.Hudson_26, "Tour de :",(SCREEN_W)/7+40, SCREEN_H-175, makecol(255,255,255),-1 );
+            textprintf_centre_ex(buffer, police.Hudson_26, (SCREEN_W)/7+40, SCREEN_H-125,  partie.playerBase[pTurn].color, -1, "%s", partie.playerBase[pTurn].name);
+
+            //temps restant
+            textout_centre_ex(buffer, police.Hudson_26, "Temps :",(SCREEN_W)/2, SCREEN_H-175, makecol(255,255,255),-1 );
+            textprintf_centre_ex(buffer, police.Hudson_26, SCREEN_W/2, SCREEN_H-125, makecol(255,255,255), -1, "%lds", (long  int)remaining_time);
+
+
+            //score
+            textout_centre_ex(buffer, police.Hudson_26, "Score:",(SCREEN_W)*6/7-40, SCREEN_H-175, makecol(255,255,255),-1 );
+            textprintf_centre_ex(buffer, police.Hudson_26, (SCREEN_W)*6/7-40, SCREEN_H-125,  makecol(255,255,255), -1, "%d", playerScore[pTurn]);
+
+
+            ///CALCUL APPARITION/DISPARITION TAUPES
+            if(elapsed_time>tick) //si une seconde est passée
             {
-                //on affiche la taupe
-                circlefill(buffer, tabTaupes[i][0], tabTaupes[i][1], 75, makecol(255,255,255));
-                masked_blit(image.taupe, buffer,0,0, tabTaupes[i][0]-35, tabTaupes[i][1]-35, 75,75 );
+                tick = elapsed_time;//on remet le tick au temps actuel
+
+                for(int i=0; i<13; i++)
+                {
+                    //si la taupe est déjà présente
+
+                    if(tabTaupes[i][2]>0)
+                    {
+                        tabTaupes[i][2]--;//on lui retire une seconde de son temps d'apparition restant
+                    }
+                    //sinon
+                    else if(tabTaupes[i][2]==0)
+                    {
+                        if(rand()%5==0)//on tire au hasard voir si elle apparait
+                        {
+                            tabTaupes[i][2] = rand()%3 +1; //si elle apparait, on lui donne une durée aléatoire
+                        }
+                    }
+
+                }
             }
+
+            ///AFFICHAGE TROUS TAUPES
+
+            for(int i=0; i<13; i++)
+            {
+                circlefill(buffer, tabTaupes[i][0], tabTaupes[i][1], 75, makecol(0,0,0));
+                if(tabTaupes[i][2]>0)
+                {
+                    //on affiche la taupe
+                    circlefill(buffer, tabTaupes[i][0], tabTaupes[i][1], 75, makecol(255,255,255));
+                    masked_blit(image.taupe, buffer,0,0, tabTaupes[i][0]-35, tabTaupes[i][1]-35, 75,75 );
+                }
+            }
+
+
+            ///DETECT CLICK TAUPE
+            //on boucle pour chaque emplacement de taupe possible
+            for(int i=0; i<13; i++)
+            {
+                if(isClickInRadius(tabTaupes[i][0], tabTaupes[i][1], 75)&&tabTaupes[i][2]>0) //calcul si le click est dans le rayon de la taupe et qu'il y en a une
+                {
+                    tabTaupes[i][2]=0; //on supprime la taupe
+                    playerScore[pTurn]++; //on augmente le score
+                }
+            }
+            blit(buffer,screen,0,0,0,0,SCREEN_W,SCREEN_H);
         }
 
-        ///DETECT CLICK TAUPE
-        //on boucle pour chaque emplacement de taupe possible
-        for(int i=0; i<13; i++)
-        {
-            if(isClickInRadius(tabTaupes[i][0], tabTaupes[i][1], 75)&&tabTaupes[i][2]==1) //calcul si le click est dans le rayon de la taupe et qu'il y en a une
-            {
-                tabTaupes[i][2]=0; //on supprime la taupe
-                score++; //on augmente le score
-            }
-        }
-        blit(buffer,screen,0,0,0,0,SCREEN_W,SCREEN_H);
+        ///FIN DU JEU
     }
 
-    return partie;
-}
+     start_time = time(NULL);  // Temps de départ
+    elapsed_time = 0;         // Temps écoulé
+     duration = 3;
+            
+            //---------------------------A CONTINUER------------------------------------------
+    
 
 void barreChargement()
 {
