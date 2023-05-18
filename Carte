@@ -118,4 +118,55 @@ int main()
             terrain[i][j]=0;
         }
     }
+    
+    //assignation des batiments et zones de jeu
+    //tir au ballon
+    terrain[3][1]=1;
+    terrain[3][2]=1;
+    terrain[4][1]=1;
+    terrain[4][2]=1;
+    terrain[4][3]=11;
+
+    //paris hippiques
+    terrain[2][6]=2;
+    terrain[2][7]=2;
+    terrain[3][6]=2;
+    terrain[3][7]=2;
+    terrain[3][5]=22;
+
+    //taupe la
+    terrain[7][4]=3;
+    terrain[7][5]=3;
+    terrain[8][4]=3;
+    terrain[8][5]=3;
+    terrain[6][4]=33;
+
+    int posJoueur[2];//matrice 2:1 stockant la position du joueur sur la carte
+
+    posJoueur[0]=5;
+    posJoueur[1]=8;
+
+
+    partie.playerBase[0].color=makecol(17,75,200);
+    partie.playerBase[1].color=makecol(129,30,30);
+
+    partie.playerBase[0].name =malloc(sizeof(strlen("Jean")));
+    strcpy(partie.playerBase[0].name, "Jean");
+
+    partie.playerBase[1].name = malloc(sizeof(strlen("Valjean")));
+    strcpy(partie.playerBase[1].name, "Valjean");
+
+
+    partie.playerBase[0].tickets=5;
+    partie.playerBase[1].tickets=5;
+
+
+    while(actionJoueur==0)
+    {
+        clear_bitmap(buffer);
+        rectfill(buffer, 0,0, SCREEN_W, SCREEN_H, makecol(0,125,0)); //affichage du fond
+
+        rectfill(buffer, 1100, 0, SCREEN_W, SCREEN_H, makecol(127,127,127)); //affichage de la barre d'interface
+
+
 
