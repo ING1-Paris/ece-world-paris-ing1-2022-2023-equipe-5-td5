@@ -368,7 +368,120 @@ for(int pTurn=0; pTurn<2; pTurn++)
      start_time = time(NULL);  // Temps de départ
     elapsed_time = 0;         // Temps écoulé
      duration = 3;
-            
+ 
+    
+        //RESULTAT DU JEU 
+    if(playerScore[0]<playerScore[1])//si le joueur 1 a un score plus bas que le joueur 2
+    {
+        partie.playerBase[1].tickets++;
+        //victoire joueur 2
+        while(elapsed_time < duration)
+        {
+
+
+            elapsed_time = time(NULL) - start_time;
+
+            clear_bitmap(buffer);
+
+
+            rectfill(buffer, 0,0, SCREEN_W, SCREEN_H, makecol(203,32,38)); //affichage des bords
+            rectfill(buffer, 20,20, SCREEN_W-20, SCREEN_H-20, makecol(114,95,79)); //affichage du fond
+
+            rectfill(buffer, 0,SCREEN_H-200, SCREEN_W, SCREEN_H, makecol(0,0,0));
+            rectfill(buffer, 0+10,SCREEN_H-200+10, SCREEN_W-10, SCREEN_H-10, makecol(136,140,141)); //affichage bordereau d'information
+
+
+            rectfill(buffer, 486-3, SCREEN_H-200, 486+3,  SCREEN_H, makecol(0,0,0)); //délimitation des cases
+            rectfill(buffer, 972-3, SCREEN_H-200, 972+3,  SCREEN_H, makecol(0,0,0));
+
+
+
+
+            rectfill(buffer,SCREEN_W/4-20,SCREEN_H/4-20, SCREEN_W*3/4+20,SCREEN_H*3/4+20, makecol(0,0,0));
+            rectfill(buffer,SCREEN_W/4,SCREEN_H/4, SCREEN_W*3/4,SCREEN_H*3/4, makecol(100,100,100)); // affichage de l'encarte
+
+            textprintf_centre_ex(buffer, police.Hudson_26, SCREEN_W/2, SCREEN_H/2-150, makecol(255,255,255), -1, "Victoire  de %s !", partie.playerBase[1].name);
+
+            blit(buffer, screen,0,0,0,0,SCREEN_W,SCREEN_H);
+        }
+
+
+    }
+    else if(playerScore[0]>playerScore[1])//si le joueur 1 a un score plus haut que le joueur 2
+    {
+        //victoire joueur 1
+
+        partie.playerBase[0].tickets++;
+
+        while(elapsed_time < duration)
+        {
+
+
+            elapsed_time = time(NULL) - start_time;
+
+            clear_bitmap(buffer);
+
+
+            rectfill(buffer, 0,0, SCREEN_W, SCREEN_H, makecol(203,32,38)); //affichage des bords
+            rectfill(buffer, 20,20, SCREEN_W-20, SCREEN_H-20, makecol(114,95,79)); //affichage du fond
+
+            rectfill(buffer, 0,SCREEN_H-200, SCREEN_W, SCREEN_H, makecol(0,0,0));
+            rectfill(buffer, 0+10,SCREEN_H-200+10, SCREEN_W-10, SCREEN_H-10, makecol(136,140,141)); //affichage bordereau d'information
+
+
+            rectfill(buffer, 486-3, SCREEN_H-200, 486+3,  SCREEN_H, makecol(0,0,0)); //délimitation des cases
+            rectfill(buffer, 972-3, SCREEN_H-200, 972+3,  SCREEN_H, makecol(0,0,0));
+
+
+
+
+            rectfill(buffer,SCREEN_W/4-20,SCREEN_H/4-20, SCREEN_W*3/4+20,SCREEN_H*3/4+20, makecol(0,0,0));
+            rectfill(buffer,SCREEN_W/4,SCREEN_H/4, SCREEN_W*3/4,SCREEN_H*3/4, makecol(100,100,100)); // affichage de l'encarte
+
+            textprintf_centre_ex(buffer, police.Hudson_26, SCREEN_W/2, SCREEN_H/2-150, makecol(255,255,255), -1, "Victoire  de %s !", partie.playerBase[0].name);
+
+            blit(buffer, screen,0,0,0,0,SCREEN_W,SCREEN_H);
+        }
+    }
+    else
+    {
+        //égalité, les 2 joueurs gagnent un ticket
+        partie.playerBase[0].tickets++;
+        partie.playerBase[1].tickets++;
+        //victoire joueur 2
+        while(elapsed_time < duration)
+        {
+
+
+            elapsed_time = time(NULL) - start_time;
+
+            clear_bitmap(buffer);
+
+
+            rectfill(buffer, 0,0, SCREEN_W, SCREEN_H, makecol(203,32,38)); //affichage des bords
+            rectfill(buffer, 20,20, SCREEN_W-20, SCREEN_H-20, makecol(114,95,79)); //affichage du fond
+
+            rectfill(buffer, 0,SCREEN_H-200, SCREEN_W, SCREEN_H, makecol(0,0,0));
+            rectfill(buffer, 0+10,SCREEN_H-200+10, SCREEN_W-10, SCREEN_H-10, makecol(136,140,141)); //affichage bordereau d'information
+
+
+            rectfill(buffer, 486-3, SCREEN_H-200, 486+3,  SCREEN_H, makecol(0,0,0)); //délimitation des cases
+            rectfill(buffer, 972-3, SCREEN_H-200, 972+3,  SCREEN_H, makecol(0,0,0));
+
+
+
+
+            rectfill(buffer,SCREEN_W/4-20,SCREEN_H/4-20, SCREEN_W*3/4+20,SCREEN_H*3/4+20, makecol(0,0,0));
+            rectfill(buffer,SCREEN_W/4,SCREEN_H/4, SCREEN_W*3/4,SCREEN_H*3/4, makecol(100,100,100)); // affichage de l'encarte
+
+            textprintf_centre_ex(buffer, police.Hudson_26, SCREEN_W/2, SCREEN_H/2-150, makecol(255,255,255), -1, "Egalite!");
+
+            blit(buffer, screen,0,0,0,0,SCREEN_W,SCREEN_H);
+        }
+
+    }
+
+
             //---------------------------A CONTINUER------------------------------------------
     
 
