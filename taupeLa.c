@@ -508,7 +508,6 @@ for(int pTurn=0; pTurn<2; pTurn++)
 
             //---------------------------A CONTINUER------------------------------------------
     
-
 void barreChargement()
 {
     BITMAP * buffer2x;
