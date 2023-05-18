@@ -7,14 +7,13 @@
 #include <time.h>
 
 
-#define SCREEN_W 1500 //largeur de la fenêtre allegro
-#define SCREEN_H 1000  //hauteur de la fenêtre allegro
+#define SCREEN_W 1500 //largeur de la fenÃªtre allegro
+#define SCREEN_H 1000  //hauteur de la fenÃªtre allegro
 
 
 ///--------------------STRUCTURES---------------------------///
 
-
-typedef struct joueur //structure chargée de stocker les informations d'un joueur
+typedef struct joueur //structure chargÃ©e de stocker les informations d'un joueur
 {
     //nom
     char name[20];
@@ -25,12 +24,11 @@ typedef struct joueur //structure chargée de stocker les informations d'un joueu
 
 }t_joueur;
 
-
-typedef struct minigame //structure chargée de stocker les informations d'une attraction
+typedef struct minigame //structure chargÃ©e de stocker les informations d'une attraction
 {
     //nom
     char titre[20];
-    //difficulées
+    //difficulÃ©es
     int difficulty;
     //specs
 
@@ -42,15 +40,13 @@ typedef struct minigame //structure chargée de stocker les informations d'une at
 }t_minigame;
 
 
-typedef struct terrain //structure permettant de stocker les informations de la carte où l'on se déplace pour atteindre les différentes attractions
+typedef struct terrain //structure permettant de stocker les informations de la carte oÃ¹ l'on se dÃ©place pour atteindre les diffÃ©rentes attractions
 {
     int occupied; //0=non (traversable) 1=oui (pas traversable)
-    int isStartAttraction; //savoir si la case est un emplacement pour démarrer une attraction
+    int isStartAttraction; //savoir si la case est un emplacement pour dÃ©marrer une attraction
 }t_terrain;
 
-
-
-typedef struct partie //structure principale chargée de stocker toutes les infos de la partie
+typedef struct partie //structure principale chargÃ©e de stocker toutes les infos de la partie
 {
     //tab de 2 joueurs
     t_joueur playerBase[2];
@@ -61,15 +57,9 @@ typedef struct partie //structure principale chargée de stocker toutes les infos
 
     int playerPos[2];//position du joueur sur la carte
 
-
-
 }t_partie;
 
-
-
-
-
-typedef struct banqueImage //  Structure utilisée pour stocker les images utilisées pour le projet
+typedef struct banqueImage //  Structure utilisÃ©e pour stocker les images utilisÃ©es pour le projet
 {
     BITMAP * fondMenu;
     BITMAP * joueur;
@@ -78,8 +68,7 @@ typedef struct banqueImage //  Structure utilisée pour stocker les images utilis
 
 }t_banqueImage;
 
-
-typedef struct banquePolice //  Structure utilisée pour stocker les polices utilisées pour le projet
+typedef struct banquePolice //  Structure utilisÃ©e pour stocker les polices utilisÃ©es pour le projet
 {
     FONT * Roller_72;
     FONT * Roller_it_24;
@@ -88,23 +77,19 @@ typedef struct banquePolice //  Structure utilisée pour stocker les polices util
 
 }t_banquePolice;
 
-
-
 ///--------------------- SOUS-PROGS -----------------------///
 
-//-------- Système -------//
-void initAllegro(); //SSPG chargé d'initialiser les fonctions d'allegro
-t_banqueImage loadBanqueImage(); //SSPG chargé d'initaliser et de charger les différentes images dans la structure de stockage
-t_banquePolice loadBanquePolices();//idem mais pour les polices d'"critures utilisées
-t_partie initPartie(); //SSPG chargé d'initialiser les données d'une nouvelles parties
+//-------- SystÃ¨me -------//
+void initAllegro(); //SSPG chargÃ© d'initialiser les fonctions d'allegro
+t_banqueImage loadBanqueImage(); //SSPG chargÃ© d'initaliser et de charger les diffÃ©rentes images dans la structure de stockage
+t_banquePolice loadBanquePolices();//idem mais pour les polices d'"critures utilisÃ©es
+t_partie initPartie(); //SSPG chargÃ© d'initialiser les donnÃ©es d'une nouvelles parties
 
 //---------Menu-----------//
-void menuPrincipal(t_partie partie, t_banqueImage image, t_banquePolice police); //SSPG chargé de l'affichage du menu principal et d'enregistrer le choix du joueur
+void menuPrincipal(t_partie partie, t_banqueImage image, t_banquePolice police); //SSPG chargÃ© de l'affichage du menu principal et d'enregistrer le choix du joueur
 
 
-
-
-//SSPG chargé de l'initialisation des fonctions relatives à allegro
+//SSPG chargÃ© de l'initialisation des fonctions relatives Ã  allegro
 void initAllegro()
 {
 
@@ -121,23 +106,20 @@ void initAllegro()
         exit(1);
     }
 
-    if((set_gfx_mode(GFX_AUTODETECT_WINDOWED,SCREEN_W,SCREEN_H,0,0))!=0)      //paramètres fenêtre
+    if((set_gfx_mode(GFX_AUTODETECT_WINDOWED,SCREEN_W,SCREEN_H,0,0))!=0)      //paramÃ¨tres fenÃªtre
     {
-        //problème avec fenêtre allegro
+        //problÃ¨me avec fenÃªtre allegro
         allegro_message("Pb de mode graphique");
         allegro_exit();                                             //fermeture allegro
-        exit(EXIT_FAILURE);                                         //sortie forcée du programme
+        exit(EXIT_FAILURE);                                         //sortie forcÃ©e du programme
     }
 
-    show_mouse(screen); //on affiche la souris à l'écran
-
-
-
+    show_mouse(screen); //on affiche la souris Ã  l'Ã©cran
 
 }
 
 
-//SSPG chargé d'initialiser les données d'une nouvelle partie
+//SSPG chargÃ© d'initialiser les donnÃ©es d'une nouvelle partie
 t_partie initPartie()
 {
     t_partie partie;
@@ -192,13 +174,12 @@ t_banquePolice loadBanquePolices()
 
 
 /*
-    SSPG chargé d'afficher les options du menu principal et
-    d'enregistrer le choix du joueur
+    SSPG chargÃ© d'afficher les options du menu principal et d'enregistrer le choix du joueur
 */
 void menuPrincipal(t_partie partie, t_banqueImage image, t_banquePolice police)
 {
-    //déclaration des différentes variables
-    int choix=0; //variable pour stocker le choix du joueur, initialisée à 0
+    //dÃ©claration des diffÃ©rentes variables
+    int choix=0; //variable pour stocker le choix du joueur, initialisÃ©e Ã  0
 
     BITMAP * buffer; //on utilise un buffer pour un affichage plus fluide
     buffer=create_bitmap(SCREEN_W,SCREEN_H);
@@ -242,7 +223,7 @@ void menuPrincipal(t_partie partie, t_banqueImage image, t_banquePolice police)
                 if(mouse_b==1)//si il clique sur la case
                 {
                     choix=i+1; //on set le choix correspondant
-                    rectfill(buffer, 50+50*i, 235+100*i, 400+50*i, 300+100*i, makecol(4, 45, 148)); //on réaffiche la case en bleu foncé
+                    rectfill(buffer, 50+50*i, 235+100*i, 400+50*i, 300+100*i, makecol(4, 45, 148)); //on rÃ©affiche la case en bleu foncÃ©
 
                 }
 
@@ -258,26 +239,20 @@ void menuPrincipal(t_partie partie, t_banqueImage image, t_banquePolice police)
         textout_centre_ex(buffer, police.Roller_it_24, "Classement", 324-1, 434+2,  makecol(0,0,0), -1);
         textout_centre_ex(buffer, police.Roller_it_24, "Quitter", 374-1, 535+2,  makecol(0,0,0), -1);
 
-        //on affiche les textes des différentes options du menu
+        //on affiche les textes des diffÃ©rentes options du menu
         textout_centre_ex(buffer, police.Roller_it_24, "Nouvelle Partie", 225, 235, makecol(95, 137, 140), -1);
         textout_centre_ex(buffer, police.Roller_it_24, "Charger Partie", 275, 335, makecol(95, 137, 140), -1);
         textout_centre_ex(buffer, police.Roller_it_24, "Classement", 325, 435, makecol(95, 137, 140), -1);
         textout_centre_ex(buffer, police.Roller_it_24, "Quitter", 375, 535, makecol(95, 137, 140), -1);
 
-
-
-
-
-
-
-        blit(buffer, screen, 0,0,0,0, SCREEN_W,SCREEN_H); //on affiche le contenu du buffer à l'écran
+        blit(buffer, screen, 0,0,0,0, SCREEN_W,SCREEN_H); //on affiche le contenu du buffer Ã  l'Ã©cran
 
 
 
     }
 
 
-    ///résultats du choix
+    ///rÃ©sultats du choix
     switch(choix)
     {
         //nouvelle partie
@@ -313,9 +288,9 @@ int main()
     t_partie partie;
 
 
-    initAllegro(); //on initialise tout le nécessaire en rapport avec allegro
+    initAllegro(); //on initialise tout le nÃ©cessaire en rapport avec allegro
 
-    banqueImage = loadBanqueImage(); //on charge les images utilisées dans la structure
+    banqueImage = loadBanqueImage(); //on charge les images utilisÃ©es dans la structure
     banquePolice = loadBanquePolices(); //idem avec les polices
 
     //initialisation de la carte
