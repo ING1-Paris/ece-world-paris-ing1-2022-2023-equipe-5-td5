@@ -482,6 +482,30 @@ for(int pTurn=0; pTurn<2; pTurn++)
     }
 
 
+    //remplacement des high score et score de partie
+    for(int i=0; i<2; i++)
+    {
+        //on check si le score que le joueur viens de faire est son meilleur score ou son premier
+        if(partie.playerBase[i].score[2]>playerScore[i]||partie.playerBase[i].score[2]==-1)
+        {
+            partie.playerBase[i].score[2]=playerScore[i];
+        }
+        //on check si le score que le joueur viens de faire est le meilleur score de tout les temps
+        if(partie.playerBase[i].score[2]<partie.tabHighScore[2])
+        {
+            partie.tabHighScore[2]=partie.playerBase[i].score[2];
+        }
+    }
+    //on échange l'ordre de jeu des 2 joueurs
+    t_joueur jtemp;//structure de stockage temporaire
+
+    jtemp=partie.playerBase[0];
+    partie.playerBase[0]=partie.playerBase[1];
+    partie.playerBase[1]=jtemp;
+
+    return partie;
+}
+
             //---------------------------A CONTINUER------------------------------------------
     
 
