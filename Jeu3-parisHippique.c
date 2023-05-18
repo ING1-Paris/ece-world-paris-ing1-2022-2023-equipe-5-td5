@@ -20,8 +20,6 @@ typedef struct banqueImage   //Structure utilisée pour stocker les images utili
 
 }t_banqueImage;
 
-
-
 typedef struct banquePolice //Structure utilisée pour stocker les polices utilisées
 {
     FONT * Roller_72;
