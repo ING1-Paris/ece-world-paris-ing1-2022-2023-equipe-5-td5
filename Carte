@@ -168,5 +168,52 @@ int main()
 
         rectfill(buffer, 1100, 0, SCREEN_W, SCREEN_H, makecol(127,127,127)); //affichage de la barre d'interface
 
+ ///affichage de la carte
+        for(int i=0; i<10; i++) //pour toutes les cases de la carte
+        {
+            for(int j=0; j<10; j++)
+            {
 
+                rect(buffer, 110*i,100*j, 110*(i+1),100*(j+1), makecol(0,0,0) ); //on dessine le contour
+
+                switch(terrain[i][j])
+                {
+                case 0:
+                    rect(buffer, 110*i,100*j, 110*(i+1),100*(j+1), makecol(0,0,0) ); //on dessine le contour
+                    break;
+
+                case 1:
+                    rectfill(buffer, 110*i,100*j, 110*(i+1),100*(j+1), makecol(125,0,0) ); //on affiche la case du jeu 1
+                    break;
+
+                case 2:
+                    rectfill(buffer, 110*i,100*j, 110*(i+1),100*(j+1), makecol(0,255,0) ); //on affiche la case du jeu 2
+                    break;
+
+                case 3:
+                    rectfill(buffer, 110*i,100*j, 110*(i+1),100*(j+1), makecol(0,0,125) ); //on affiche la case du jeu 3
+                    break;
+
+                default:
+                    rectfill(buffer, 110*i,100*j, 110*(i+1),100*(j+1), makecol(200,200,200) ); //on affiche la case de lancement de jeu
+                    break;
+
+                }
+
+
+                if(posJoueur[0]==i && posJoueur[1]==j) rectfill(buffer, 110*i,100*j, 110*(i+1),100*(j+1), makecol(255,0,0) ); //si c'est la position du joueur, on affiche le joueur
+                if(isClickInCoord(110*i,110*(i+1),100*j,100*(j+1))&& (terrain[i][j]<1 || terrain[i][j]>3 ))
+                {
+                    posJoueur[0]=i;
+                    posJoueur[1]=j;
+
+                }
+            }
+        }
+
+        ///affichage de l'interface
+        //affichage de l'ordre de jeu
+        textout_centre_ex(buffer, police.Hudson_26, "Au Tour De:", 1300, 50, makecol(255,255,255), -1);
+        textprintf_centre_ex(buffer, police.Hudson_26, 1300, 100, partie.playerBase[0].color, -1, "%s - %dT", partie.playerBase[0].name, partie.playerBase[0].tickets );
+        textprintf_centre_ex(buffer, police.Hudson_26, 1300, 200, partie.playerBase[1].color, -1, "%s - %dT", partie.playerBase[1].name, partie.playerBase[1].tickets );
 
