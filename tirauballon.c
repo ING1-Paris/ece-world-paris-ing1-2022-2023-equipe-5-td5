@@ -5,11 +5,8 @@
 #include <string.h>
 #include <time.h>
 
-
 #define SCREEN_W 1500 //largeur de la fenêtre allegro
 #define SCREEN_H 1000  //hauteur de la fenêtre allegro
-
-
 
 typedef struct banqueImage //  Structure utilisée pour stocker les images utilisées pour le projet
 {
@@ -18,7 +15,6 @@ typedef struct banqueImage //  Structure utilisée pour stocker les images utili
     BITMAP * batMinigame[3]; //batiments représentant les mini jeux
     BITMAP * finishLine; // lgne d'arrivée de la course hippique
     BITMAP * taupe; //taupe
-
 
 } t_banqueImage;
 
@@ -72,7 +68,6 @@ typedef struct terrain //structure permettant de stocker les informations de la 
 } t_terrain;
 
 
-
 typedef struct partie //structure principale chargée de stocker toutes les infos de la partie
 {
     //tab de 2 joueurs
@@ -83,8 +78,6 @@ typedef struct partie //structure principale chargée de stocker toutes les info
     t_terrain plateau[15][15];
 
     int tabHighScore[3]; //tableau stockant les meilleurs scores de tout les temps
-
-
 
 } t_partie;
 
@@ -121,13 +114,7 @@ int main()
     partie.playerBase[1].color=makecol(129,30,30);
 
 
-
-
-
     partie = tirAuBallon(partie, image, police);
-
-
-
 
 
     return 0;
