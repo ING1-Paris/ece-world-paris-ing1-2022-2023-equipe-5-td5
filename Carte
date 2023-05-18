@@ -17,8 +17,6 @@ typedef struct banqueImage      //Structure pour stocker les images
 
 } t_banqueImage;
 
-
-
 typedef struct banquePolice    //Structure pour stocker les polices
 {
     FONT * Roller_72;  
@@ -29,8 +27,6 @@ typedef struct banquePolice    //Structure pour stocker les polices
 
 } t_banquePolice;
 
-
-
 typedef struct joueur   //structure chargée de stocker les informations d'un joueur
 {
     char* name;      //nom joueur 
@@ -40,7 +36,6 @@ typedef struct joueur   //structure chargée de stocker les informations d'un jo
     int color;       //couleur
 
 } t_joueur;
-
 
 
 typedef struct terrain         //structure qui stock les informations de la carte où l'on se déplace pour atteindre les différentes attractions
