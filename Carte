@@ -211,3 +211,94 @@ int main()
         textprintf_centre_ex(buffer, police.Hudson_26, 1300, 100, partie.playerBase[0].color, -1, "%s - %dT", partie.playerBase[0].name, partie.playerBase[0].tickets );
         textprintf_centre_ex(buffer, police.Hudson_26, 1300, 200, partie.playerBase[1].color, -1, "%s - %dT", partie.playerBase[1].name, partie.playerBase[1].tickets );
 
+//affichage des options
+        for(int i=0; i<3; i++)
+        {
+            rectfill(buffer, 1150, 500+165*i, 1450, 645+165*i, makecol(0,0,0)); //on affiche le contour
+            rectfill(buffer, 1150+5, 500+165*i+5, 1450-5, 645+165*i-5, makecol(200,200,200));  //on rmplis la case
+            if(isClickInCoord(1150+5,1450-5, 500+165*i+5,645+165*i-5)) rectfill(buffer, 1150+5, 500+165*i+5, 1450-5, 645+165*i-5, makecol(110,65,38));  //on détecte un éventuel click
+
+            switch (i)
+            {
+            case 0:
+                textout_centre_ex(buffer, police.Hudson_26, "Quitter", 1300, 540+165*i, makecol(0,0,0), -1);
+                break;
+
+            case 1:
+                textout_centre_ex(buffer, police.Hudson_26, "Classement", 1300, 540+165*i, makecol(0,0,0), -1);
+                break;
+
+            case 2:
+                textout_centre_ex(buffer, police.Hudson_26, "Jouer", 1300, 540+165*i, makecol(0,0,0), -1);
+                break;
+            }
+        }
+
+        for(int i=0; i<3; i++)
+        {
+            if(isClickInCoord(1150+5,1450-5, 500+165*i+5,645+165*i-5)) choix=i+1;  //on détecte un éventuel click
+        }
+
+        switch (choix) //on regarde le choix du joueur
+        {
+        case 1:
+            actionJoueur=1; //on quitte la partie
+            break;
+
+        case 2:
+            actionJoueur=2; //on affiche le classement
+            break;
+
+        case 3 :
+            switch(terrain[posJoueur[0]][posJoueur[1]]) //on regarde la case de la où on se trouve
+            {
+            case 11: //si c'est le lancement du jeu 1
+                actionJoueur=11;
+                break;
+
+            case 22: //si c'est le lancement du jeu 2
+                actionJoueur=22;
+                break;
+
+            case 33: //si c'est le lancement du jeu 3
+                actionJoueur=33;
+                break;
+
+
+            default: //si c'est une case lambda
+                choix=0; //on remet le choix à 0
+                break;
+            }
+            break;
+
+        }
+
+        blit(buffer, screen, 0,0, 0,0,SCREEN_W,SCREEN_H);
+    }
+
+    switch(actionJoueur)
+    {
+    case 1:
+        //sauvegarder et quitter
+        break;
+
+    case 2:
+        //classement
+        break;
+
+    case 11:
+        //lancer jeu 1
+        break;
+
+    case 22:
+        //lancer jeu 2
+        break;
+
+    case 33:
+        //lancer jeu 3
+        break;
+
+    }
+    return 0;
+}
+END_OF_MAIN()
