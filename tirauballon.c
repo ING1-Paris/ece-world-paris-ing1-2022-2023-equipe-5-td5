@@ -292,12 +292,6 @@ t_partie tirAuBallon(t_partie partie, t_banqueImage image, t_banquePolice police
             }
 
 
-
-
-
-
-
-
             blit(buffer,screen,0,0,0,0,SCREEN_W,SCREEN_H);
         }
 
@@ -333,8 +327,6 @@ t_partie tirAuBallon(t_partie partie, t_banqueImage image, t_banquePolice police
 
             rectfill(buffer, 486-3, SCREEN_H-200, 486+3,  SCREEN_H, makecol(0,0,0)); //délimitation des cases
             rectfill(buffer, 972-3, SCREEN_H-200, 972+3,  SCREEN_H, makecol(0,0,0));
-
-
 
 
             rectfill(buffer,SCREEN_W/4-20,SCREEN_H/4-20, SCREEN_W*3/4+20,SCREEN_H*3/4+20, makecol(0,0,0));
@@ -373,8 +365,6 @@ t_partie tirAuBallon(t_partie partie, t_banqueImage image, t_banquePolice police
             rectfill(buffer, 972-3, SCREEN_H-200, 972+3,  SCREEN_H, makecol(0,0,0));
 
 
-
-
             rectfill(buffer,SCREEN_W/4-20,SCREEN_H/4-20, SCREEN_W*3/4+20,SCREEN_H*3/4+20, makecol(0,0,0));
             rectfill(buffer,SCREEN_W/4,SCREEN_H/4, SCREEN_W*3/4,SCREEN_H*3/4, makecol(100,100,100)); // affichage de l'encarte
 
@@ -409,8 +399,6 @@ t_partie tirAuBallon(t_partie partie, t_banqueImage image, t_banquePolice police
             rectfill(buffer, 972-3, SCREEN_H-200, 972+3,  SCREEN_H, makecol(0,0,0));
 
 
-
-
             rectfill(buffer,SCREEN_W/4-20,SCREEN_H/4-20, SCREEN_W*3/4+20,SCREEN_H*3/4+20, makecol(0,0,0));
             rectfill(buffer,SCREEN_W/4,SCREEN_H/4, SCREEN_W*3/4,SCREEN_H*3/4, makecol(100,100,100)); // affichage de l'encarte
 
@@ -420,8 +408,6 @@ t_partie tirAuBallon(t_partie partie, t_banqueImage image, t_banquePolice police
         }
 
     }
-
-
 
 
     //remplacement des high score et score de partie
@@ -448,12 +434,8 @@ t_partie tirAuBallon(t_partie partie, t_banqueImage image, t_banquePolice police
     partie.playerBase[1]=jtemp;
 
 
-
-
-
     return partie;
 }
-
 
 
 void creerCoordBallons(int tabCoordBallon[10][2])
@@ -483,8 +465,6 @@ int collision(int tabCoordBallon[10][2], int nbGen)
     }
     return 0; //sinon 0
 }
-
-
 
 void loadStartGame(t_banquePolice police, t_partie partie, int game, int actualP)
 {
@@ -542,17 +522,10 @@ void loadStartGame(t_banquePolice police, t_partie partie, int game, int actualP
     }
 
 
-
-
-
     //faire un switch case pour l'image à charger: 1=tir au ballon 2=taupe là 3= paris hippiques
 
 
 }
-
-
-
-
 
 
 //SSPG permettant le chargement des images dans la structure
