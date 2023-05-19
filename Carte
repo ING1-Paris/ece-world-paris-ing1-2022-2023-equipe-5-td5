@@ -206,8 +206,7 @@ int main()
             }
         }
 
-        ///affichage de l'interface
-        //affichage de l'ordre de jeu
+        ///affichage de l'interface et affichage de l'ordre de jeu
         textout_centre_ex(buffer, police.Hudson_26, "Au Tour De:", 1300, 50, makecol(255,255,255), -1);
         textprintf_centre_ex(buffer, police.Hudson_26, 1300, 100, partie.playerBase[0].color, -1, "%s - %dT", partie.playerBase[0].name, partie.playerBase[0].tickets );
         textprintf_centre_ex(buffer, police.Hudson_26, 1300, 200, partie.playerBase[1].color, -1, "%s - %dT", partie.playerBase[1].name, partie.playerBase[1].tickets );
