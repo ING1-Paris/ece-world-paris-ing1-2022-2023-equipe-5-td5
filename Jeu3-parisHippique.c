@@ -15,7 +15,7 @@ typedef struct banqueImage   //Structure utilisée pour stocker les images utili
     BITMAP * fondMenu;          //fond du menu principal
     BITMAP * joueur;            // sprite du joueur
     BITMAP * batMinigame[3];    //batiments représentant les mini jeux
-    BITMAP * finishLine;        // lgne d'arrivée de la course hippique
+    BITMAP * finishLine;        //ligne d'arrivée de la course hippique
     BITMAP * taupe;             //taupe
 
 }t_banqueImage;
@@ -56,7 +56,8 @@ typedef struct minigame  //structure chargée de stocker les informations d'une 
 
 
 
-typedef struct terrain    //structure permettant de stocker les informations de la carte où l'on se déplace pour atteindre les différentes attractions
+
+typedef struct terrain      //structure permettant de stocker les informations de la carte où l'on se déplace pour atteindre les différentes attractions
 {
     int occupied;            //0=non (traversable) 1=oui (pas traversable)
     int isStartAttraction;   //savoir si la case est un emplacement pour démarrer une attraction
