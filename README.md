@@ -5,7 +5,7 @@
   -Deuxième jeu : Tir sur Ballon   
   -Troisième jeu : Paris Hippiques    
 
-Thème : Rollercoaster Tycoon
+Thème : Rollercoaster Tycoon et univers pokémon (carte et personnages)
 
 Vous pouvez éditer le fichier README.md (en langage **Markdown**) pour modifier cette partie.
 Vous pouvez générer des schémas en utilisant [Mermaid](https://github.com/mermaid-js/mermaid).
