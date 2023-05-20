@@ -28,9 +28,6 @@ typedef struct joueur //structure chargée de stocker les informations d'un joue
 
 }t_joueur;
 
-
-
-
 typedef struct partie //structure principale chargée de stocker toutes les infos de la partie
 {
     //tab de 2 joueurs
@@ -40,7 +37,6 @@ typedef struct partie //structure principale chargée de stocker toutes les info
     int posJoueur[2];//matrice 2:1 stockant la position des joueurs sur la carte
     int tabHighScore[3]; //tableau stockant les meilleurs scores de tout les temps
 }t_partie;
-
 
 
 typedef struct banqueImage //  Structure utilisée pour stocker les images utilisées pour le projet
@@ -92,8 +88,6 @@ void afficherClassement( t_partie partie, t_banqueImage image, t_banquePolice po
 
 
 ///-------------------------MAIN--------------------------///
-
-
 
 
 int main()
