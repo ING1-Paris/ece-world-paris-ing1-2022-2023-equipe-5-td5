@@ -85,7 +85,10 @@ t_partie parisHippiques(t_partie partie, t_banqueImage image, t_banquePolice pol
 int isClickInRadius(int x, int y, int rad);
 t_banqueImage loadBanqueImage();
 
-//MAIN
+
+
+
+//---------------------------------MAIN-------------------------------------
 
 int main()
 {
