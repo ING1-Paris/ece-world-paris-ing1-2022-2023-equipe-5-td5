@@ -274,15 +274,11 @@ void menuPrincipal(t_partie partie, t_banqueImage image, t_banquePolice police)
         break;
 
     }
-
-
 }
-
-
 
 int main()
 {
-    ///DECLARATION DES STRUCTURE PRINCIPALES
+    ///DECLARATION DES STRUCTURES PRINCIPALES
     t_banqueImage banqueImage;
     t_banquePolice banquePolice;
     t_partie partie;
