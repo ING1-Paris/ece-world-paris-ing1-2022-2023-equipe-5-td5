@@ -488,6 +488,7 @@ t_joueur remplirJoueur(int playerCount, t_banqueImage image, t_banquePolice poli
 }
 
 
+
 //-------------------SYSTEME
 
 
@@ -519,8 +520,6 @@ void initAllegro()
     show_mouse(screen); //on affiche la souris à l'écran
 
 
-
-
 }
 
 
@@ -531,20 +530,16 @@ t_partie initPartie()
 
 
 
-
     partie.playerBase[0].color = makecol(184,56,59);   //rouge
-
 
 
     partie.playerBase[1].color = makecol(37,109, 141);    //bleu
 
 
-
-
-
-
     return partie;
 }
+
+
 
 
 //SSPG permettant le chargement des images dans la structure
@@ -566,6 +561,8 @@ t_banqueImage loadBanqueImage()
 
     return image;
 }
+
+
 
 //SSPG permettant le chargement des polices dans la structure
 t_banquePolice loadBanquePolices()
@@ -604,6 +601,8 @@ int isClickInRadius(int x, int y, int rad)
     }
     else return 0;
 }
+
+
 
 //-------------BOUCLE DE JEU
 
@@ -762,10 +761,6 @@ void afficherCarte(BITMAP * buffer,  t_banquePolice police, t_banqueImage image,
                 posJoueur[1]=j;
 
             }
-
-
-
-
         }
     }
 
@@ -800,7 +795,6 @@ void afficherCarte(BITMAP * buffer,  t_banquePolice police, t_banqueImage image,
             break;
         }
     }
-
 }
 
 
