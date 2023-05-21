@@ -74,30 +74,18 @@ typedef struct partie //stocker toutes les infos de la partie (structure princip
 } t_partie;
 
 
-//SSPG chargé d'initialiser les fonctions d'allegro
-void initAllegro();     
-int isClickInCoord(int x1, int x2, int y1, int y2);
-void barreChargement();
-t_banquePolice loadBanquePolices();
-t_partie parisHippiques(t_partie partie, t_banqueImage image, t_banquePolice police );
-int isClickInRadius(int x, int y, int rad);
-t_banqueImage loadBanqueImage();
-
-
 
 
 //---------------------------------MAIN-------------------------------------
 
+/*PRINCIPE JEU :
+    -4 options pour miser sur un cheval (Rouge, Vert, Bleu, Jaune)
+    -chaque joueur paris sur un cheval (possible que ce soit le même pour les 2 joueurs
+    -4 vitesses préexistantes, assigné random au lancement de la course
+    -si un ou plusieurs joueur mise sur le bon cheval, il gagne un ticket */
+
 int main()
 {
-
-    //4 options pour miser sur un cheval (Rouge, Vert, Bleu, Jaune)
-    //chaque joueur paris sur un cheval (possible que ce soit le même pour les 2 joueurs
-
-    //4 vitesses préexistantes, assigné random au lancement de la course
-
-    //si un ou plusieurs joueur mise sur le bon cheval, il gagne un ticket
-
 
     t_partie partie;
     t_banqueImage image;
@@ -108,7 +96,6 @@ int main()
 
     police = loadBanquePolices();
     image = loadBanqueImage();
-
 
 
 
@@ -159,8 +146,6 @@ int main()
 
 
 
-
-
     while(!key[KEY_ESC])
     {
         clear_bitmap(buffer);
@@ -187,11 +172,8 @@ int main()
     }
 
 
-
     //barreChargement();
-
-
-  //  partie= parisHippiques(partie, image, police);
+  // partie= parisHippiques(partie, image, police);
 
 
     return 0;
@@ -199,11 +181,22 @@ int main()
 END_OF_MAIN()
 
 
+//-----------------------------------SOUS-PROGRAMMES----------------------------------
     
     
+//SSPG chargé d'initialiser les fonctions d'allegro
+void initAllegro();     
+int isClickInCoord(int x1, int x2, int y1, int y2);
+void barreChargement();
+t_banquePolice loadBanquePolices();
+t_partie parisHippiques(t_partie partie, t_banqueImage image, t_banquePolice police );
+int isClickInRadius(int x, int y, int rad);
+t_banqueImage loadBanqueImage();
+
+    
+
 t_partie parisHippiques(t_partie partie, t_banqueImage image, t_banquePolice police )
 {
-
     BITMAP * buffer = create_bitmap(SCREEN_W,SCREEN_H); //déclaration du buffer
 
 
@@ -212,7 +205,6 @@ t_partie parisHippiques(t_partie partie, t_banqueImage image, t_banquePolice pol
     int temp;
     srand(time(NULL)); //utilisation de l'aléatoire
     int rand1, rand2; //variables utilisées pour le mélange
-
 
     //set la vitesse des différents chevaux
     tabHorseSpeed[0]= 1;
@@ -272,17 +264,17 @@ t_partie parisHippiques(t_partie partie, t_banqueImage image, t_banquePolice pol
 
 
 
-
+//SSPG barre de chargement 
 void barreChargement()
 {
     BITMAP * buffer2x;
-    buffer2x=create_bitmap(SCREEN_W,SCREEN_H);//creation du bitmap buffer double
+    buffer2x=create_bitmap(SCREEN_W,SCREEN_H);      //creation du bitmap buffer double
 
-    //Kabel_28= load_font("polices/kabelMono_28.pcx", NULL, NULL);//on load la police Kabel en 28
+    //Kabel_28= load_font("polices/kabelMono_28.pcx", NULL, NULL);       //on load la police Kabel en 28
 
-    // BITMAP *MenuDecor;//création du fond d'écran
-    // MenuDecor=load_bitmap("images/FondMono.bmp",NULL); //chargement de l'image de fond
-    //blit(MenuDecor,buffer2x,0,0,0,0,SCREEN_W,SCREEN_H);//affichage du decor du menu sur le buffer
+    // BITMAP *MenuDecor;      //création du fond d'écran
+    // MenuDecor=load_bitmap("images/FondMono.bmp",NULL);    //chargement de l'image de fond
+    // blit(MenuDecor,buffer2x,0,0,0,0,SCREEN_W,SCREEN_H);    //affichage du decor du menu sur le buffer
 
     rectfill(buffer2x,0,0,SCREEN_W, SCREEN_H, makecol(255,255,255));
 
@@ -293,21 +285,21 @@ void barreChargement()
         clear_bitmap(buffer2x);
 
         rectfill(buffer2x,0,0,SCREEN_W, SCREEN_H, makecol(255,255,255));
-        //blit(MenuDecor,buffer2x,0,0,0,0,SCREEN_W,SCREEN_H);//affichage du decor du menu sur le buffer
+        //blit(MenuDecor,buffer2x,0,0,0,0,SCREEN_W,SCREEN_H);       //affichage du decor du menu sur le buffer
 
         gauge = gauge + (10 + (rand()%10 -5));
 
-        rect(buffer2x, 199, 299, 1001,401, makecol(255,255,255)); //fond de la barre
-        rectfill(buffer2x, 200, 300, 200+gauge, 400, makecol(0,255,0));//barre de chargement
+        rect(buffer2x, 199, 299, 1001,401, makecol(255,255,255));        //fond de la barre
+        rectfill(buffer2x, 200, 300, 200+gauge, 400, makecol(0,255,0));  //barre de chargement
 
-        textout_centre_ex(buffer2x, font, "Chargement", SCREEN_W/2, 315, makecol(255,0,0), -1);//on affiche
+        textout_centre_ex(buffer2x, font, "Chargement", SCREEN_W/2, 315, makecol(255,0,0), -1);   //affichage
 
-        blit(buffer2x,screen,0,0,0,0,SCREEN_W,SCREEN_H);//affichage du double buffer sur l'écran
+        blit(buffer2x,screen,0,0,0,0,SCREEN_W,SCREEN_H);         //affichage du double buffer sur l'écran
 
         sleep((rand()%50+51)/100);
     }
 
-    clear_bitmap(buffer2x);//clear du buffer en debut de boucle
+    clear_bitmap(buffer2x);       //clear du buffer en debut de boucle
 
 }
 
@@ -347,10 +339,10 @@ t_banquePolice loadBanquePolices()
 void initAllegro()
 {
 
-    srand(time(NULL)); //on initialise la fonction random (utile pour plus tard)
-    allegro_init();    //initialisation allegro
-    install_keyboard(); //on permet l'utilisation du clavier
-    install_mouse();  //on permet l'utilisation de la souris
+    srand(time(NULL));     //on initialise la fonction random (utile pour plus tard)
+    allegro_init();        //initialisation allegro
+    install_keyboard();    //on permet l'utilisation du clavier
+    install_mouse();       //on permet l'utilisation de la souris
     set_color_depth(desktop_color_depth());    //initialisation de la palette de couleur
 
 
