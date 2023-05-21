@@ -798,11 +798,11 @@ void afficherCarte(BITMAP * buffer,  t_banquePolice police, t_banqueImage image,
 }
 
 
-
+//SSPG du classement et de la sauvegarde 
 
 void afficherClassement( t_partie partie, t_banqueImage image, t_banquePolice police, int prov)
 {
-    BITMAP * buffer = create_bitmap(SCREEN_W,SCREEN_H); //déclaration du buffer
+    BITMAP * buffer = create_bitmap(SCREEN_W,SCREEN_H);  //déclaration du buffer
 
 
     int quitter=0;//variable stockant le choix du joueur
