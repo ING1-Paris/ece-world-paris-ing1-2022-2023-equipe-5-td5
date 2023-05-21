@@ -10,7 +10,9 @@
 #define SCREEN_H 1000  //hauteur fenêtre allegro
 
 
-typedef struct banqueImage   //Structure utilisée pour stocker les images utilisées 
+//Structures
+
+typedef struct banqueImage   //stocker les images utilisées 
 {
     BITMAP * fondMenu;          //fond du menu principal
     BITMAP * joueur;            // sprite du joueur
@@ -20,7 +22,8 @@ typedef struct banqueImage   //Structure utilisée pour stocker les images utili
 
 }t_banqueImage;
 
-typedef struct banquePolice //Structure utilisée pour stocker les polices utilisées
+
+typedef struct banquePolice  //stocker les polices utilisées
 {
     FONT * Roller_72;
     FONT * Roller_it_24;
@@ -31,8 +34,7 @@ typedef struct banquePolice //Structure utilisée pour stocker les polices utili
 }t_banquePolice;
 
 
-
-typedef struct joueur //structure chargée de stocker les informations d'un joueur
+typedef struct joueur //stocker les informations d'un joueur
 {
     char* name;     //nom du joueur
     int taillenom;  //taille du nom
@@ -43,8 +45,7 @@ typedef struct joueur //structure chargée de stocker les informations d'un joue
 } t_joueur;
 
 
-
-typedef struct minigame  //structure chargée de stocker les informations d'une attraction
+typedef struct minigame  //stocker les informations d'une attraction
 {
     char titre[20];      //nom
     int difficulty;      //difficulées
@@ -55,9 +56,7 @@ typedef struct minigame  //structure chargée de stocker les informations d'une 
 } t_minigame;
 
 
-
-
-typedef struct terrain      //structure permettant de stocker les informations de la carte où l'on se déplace pour atteindre les différentes attractions
+typedef struct terrain      //stocker les informations de la carte où l'on se déplace pour atteindre les différentes attractions
 {
     int occupied;            //0=non (traversable) 1=oui (pas traversable)
     int isStartAttraction;   //savoir si la case est un emplacement pour démarrer une attraction
@@ -66,8 +65,7 @@ typedef struct terrain      //structure permettant de stocker les informations d
 } t_terrain;
 
 
-
-typedef struct partie //structure principale chargée de stocker toutes les infos de la partie
+typedef struct partie //stocker toutes les infos de la partie (structure principale)
 {
     t_joueur playerBase[2];     //tab de 2 joueurs
     t_minigame jeux[4];         //tab de 4 minigame
@@ -76,8 +74,8 @@ typedef struct partie //structure principale chargée de stocker toutes les info
 } t_partie;
 
 
-
-void initAllegro();      //SSPG chargé d'initialiser les fonctions d'allegro
+//SSPG chargé d'initialiser les fonctions d'allegro
+void initAllegro();     
 int isClickInCoord(int x1, int x2, int y1, int y2);
 void barreChargement();
 t_banquePolice loadBanquePolices();
